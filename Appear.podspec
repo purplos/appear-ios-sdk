@@ -9,7 +9,8 @@
 Pod::Spec.new do |s|
   s.name             = 'Appear'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of Appear.'
+  s.summary          = 'Create AR apps with dynamic content'
+    s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,17 +19,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A framework that makes it super easy to use dynamic Augmented Reality content in your app. Access content uploaded to the Appear Console Webpage in your iOS app.
                        DESC
 
-  s.homepage         = 'https://github.com/magnustviberg/Appear'
+  s.homepage         = 'https://github.com/purplos/appear-ios-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'magnustviberg' => 'hei@purpl.no' }
-  s.source           = { :git => 'https://github.com/magnustviberg/Appear.git', :tag => s.version.to_s }
+  s.author           = { 'Purpl AS' => 'hei@purpl.no' }
+  s.source           = { :git => 'https://github.com/purplos/appear-ios-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.3'
 
   s.source_files = 'Appear/Classes/**/*'
   
@@ -37,6 +38,6 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+    s.frameworks = 'UIKit', 'ARKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
