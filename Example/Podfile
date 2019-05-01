@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Appear_Example' do
+  pod 'Appear', :path => '../'
+
+  target 'Appear_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
