@@ -1,0 +1,6 @@
+framework module Appear {
+  umbrella header "Appear-umbrella.h"
+
+  export *
+  module * { export * }
+}

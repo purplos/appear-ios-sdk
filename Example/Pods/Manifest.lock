@@ -1,0 +1,16 @@
+PODS:
+  - Appear (0.1.0)
+
+DEPENDENCIES:
+  - Appear (from `../`)
+
+EXTERNAL SOURCES:
+  Appear:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Appear: d781fd2561742a37baef7d962218278f23e10142
+
+PODFILE CHECKSUM: cb5885c0cdf4c35a9386fcd17091593ee47bc924
+
+COCOAPODS: 1.4.0
