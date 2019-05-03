@@ -10,21 +10,21 @@
 		1E68A18568BA301BA4F137A234CE8BD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C370B576BFB8E2C1305AFA53B9872485 /* Appear-dummy.m */; };
 		3DCE4CB8CB6263B3A5E93899AEAE8A67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		4B0A0608227A34F300801A09 /* AppearApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0607227A34F300801A09 /* AppearApp.swift */; };
-		4B0A060A227A386E00801A09 /* AppearError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0609227A386E00801A09 /* AppearError.swift */; };
-		4B0A060C227A38E800801A09 /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A060B227A38E800801A09 /* HTTPResponseError.swift */; };
-		4B0A060E227A393300801A09 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A060D227A393300801A09 /* WebService.swift */; };
-		4B0A0610227A399200801A09 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A060F227A399200801A09 /* Endpoint.swift */; };
-		4B0A0612227A39CB00801A09 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0611227A39CB00801A09 /* HTTPMethod.swift */; };
-		4B0A0614227A3AA700801A09 /* SimpleARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0613227A3AA700801A09 /* SimpleARViewController.swift */; };
-		4B0A0616227A3AE500801A09 /* SimpleARViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0615227A3AE500801A09 /* SimpleARViewController+ARSCNViewDelegate.swift */; };
-		4B0A0618227A3B2000801A09 /* SimpleARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0617227A3B2000801A09 /* SimpleARViewModel.swift */; };
-		4B0A061A227A3CB600801A09 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0619227A3CB600801A09 /* SimpleTutorialView.swift */; };
-		4B0A061C227A3CFD00801A09 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A061B227A3CFD00801A09 /* AppearManager.swift */; };
-		4B0A061E227A40CB00801A09 /* AppearProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A061D227A40CB00801A09 /* AppearProject.swift */; };
-		4B0A0620227A453800801A09 /* AppearEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A061F227A453800801A09 /* AppearEndpoint.swift */; };
-		4B0A0623227A45EC00801A09 /* SCNMaterial+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0622227A45EC00801A09 /* SCNMaterial+Extension.swift */; };
-		4B0A0625227A461000801A09 /* SCNNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0624227A461000801A09 /* SCNNode+Extension.swift */; };
+		4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */; };
+		4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55C227C742300E4E455 /* AppearEndpoint.swift */; };
+		4B60E56C227C742500E4E455 /* AppearApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55D227C742300E4E455 /* AppearApp.swift */; };
+		4B60E56D227C742500E4E455 /* AppearError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55E227C742300E4E455 /* AppearError.swift */; };
+		4B60E56E227C742500E4E455 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55F227C742300E4E455 /* WebService.swift */; };
+		4B60E570227C742500E4E455 /* SCNMaterial+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */; };
+		4B60E571227C742500E4E455 /* AppearProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E562227C742400E4E455 /* AppearProject.swift */; };
+		4B60E573227C742500E4E455 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E564227C742400E4E455 /* Endpoint.swift */; };
+		4B60E574227C742500E4E455 /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E565227C742400E4E455 /* HTTPResponseError.swift */; };
+		4B60E575227C742500E4E455 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E566227C742400E4E455 /* AppearManager.swift */; };
+		4B60E57E227C746300E4E455 /* SimpleARViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E579227C746300E4E455 /* SimpleARViewController+ARSCNViewDelegate.swift */; };
+		4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */; };
+		4B60E580227C746300E4E455 /* SimpleARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57B227C746300E4E455 /* SimpleARViewController.swift */; };
+		4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57C227C746300E4E455 /* HTTPMethod.swift */; };
+		4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
 		7F307265E1A510B4A51902EB16CCF4F4 /* Pods-Appear_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B967E15AC5C8995CC6608E06552175 /* Pods-Appear_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D2BBDB6F6699F92D205075679CBA2AA /* Pods-Appear_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AA63E4BAD0A8E82A57FA6AD25770C3 /* Pods-Appear_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A504EE8D713B0F2114F44338773E2DE9 /* Pods-Appear_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA42C8B017A35D88F296F4E5260EDE0 /* Pods-Appear_Example-dummy.m */; };
@@ -54,21 +54,21 @@
 		2AECBCFD76FCA669A784A1187DF96492 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329C67ABBA76BD3BACA30D01F08A38F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41152CEFAEC90A51D7B6FE32E3F69EED /* Pods-Appear_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Appear_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		4B0A0607227A34F300801A09 /* AppearApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearApp.swift; sourceTree = "<group>"; };
-		4B0A0609227A386E00801A09 /* AppearError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearError.swift; sourceTree = "<group>"; };
-		4B0A060B227A38E800801A09 /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
-		4B0A060D227A393300801A09 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		4B0A060F227A399200801A09 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		4B0A0611227A39CB00801A09 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		4B0A0613227A3AA700801A09 /* SimpleARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleARViewController.swift; sourceTree = "<group>"; };
-		4B0A0615227A3AE500801A09 /* SimpleARViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleARViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		4B0A0617227A3B2000801A09 /* SimpleARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleARViewModel.swift; sourceTree = "<group>"; };
-		4B0A0619227A3CB600801A09 /* SimpleTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTutorialView.swift; sourceTree = "<group>"; };
-		4B0A061B227A3CFD00801A09 /* AppearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearManager.swift; sourceTree = "<group>"; };
-		4B0A061D227A40CB00801A09 /* AppearProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearProject.swift; sourceTree = "<group>"; };
-		4B0A061F227A453800801A09 /* AppearEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearEndpoint.swift; sourceTree = "<group>"; };
-		4B0A0622227A45EC00801A09 /* SCNMaterial+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+Extension.swift"; sourceTree = "<group>"; };
-		4B0A0624227A461000801A09 /* SCNNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extension.swift"; sourceTree = "<group>"; };
+		4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SCNNode+Extension.swift"; path = "Appear/Classes/SCNNode+Extension.swift"; sourceTree = "<group>"; };
+		4B60E55C227C742300E4E455 /* AppearEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearEndpoint.swift; path = Appear/Classes/AppearEndpoint.swift; sourceTree = "<group>"; };
+		4B60E55D227C742300E4E455 /* AppearApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearApp.swift; path = Appear/Classes/AppearApp.swift; sourceTree = "<group>"; };
+		4B60E55E227C742300E4E455 /* AppearError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearError.swift; path = Appear/Classes/AppearError.swift; sourceTree = "<group>"; };
+		4B60E55F227C742300E4E455 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebService.swift; path = Appear/Classes/WebService.swift; sourceTree = "<group>"; };
+		4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SCNMaterial+Extension.swift"; path = "Appear/Classes/SCNMaterial+Extension.swift"; sourceTree = "<group>"; };
+		4B60E562227C742400E4E455 /* AppearProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearProject.swift; path = Appear/Classes/AppearProject.swift; sourceTree = "<group>"; };
+		4B60E564227C742400E4E455 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = Appear/Classes/Endpoint.swift; sourceTree = "<group>"; };
+		4B60E565227C742400E4E455 /* HTTPResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPResponseError.swift; path = Appear/Classes/HTTPResponseError.swift; sourceTree = "<group>"; };
+		4B60E566227C742400E4E455 /* AppearManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearManager.swift; path = Appear/Classes/AppearManager.swift; sourceTree = "<group>"; };
+		4B60E579227C746300E4E455 /* SimpleARViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SimpleARViewController+ARSCNViewDelegate.swift"; path = "Appear/Classes/SimpleARViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
+		4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleARViewModel.swift; path = Appear/Classes/SimpleARViewModel.swift; sourceTree = "<group>"; };
+		4B60E57B227C746300E4E455 /* SimpleARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleARViewController.swift; path = Appear/Classes/SimpleARViewController.swift; sourceTree = "<group>"; };
+		4B60E57C227C746300E4E455 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Appear/Classes/HTTPMethod.swift; sourceTree = "<group>"; };
+		4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleTutorialView.swift; path = Appear/Classes/SimpleTutorialView.swift; sourceTree = "<group>"; };
 		50A9AED94064C11E784DEC5D18D24205 /* Appear.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Appear.modulemap; sourceTree = "<group>"; };
 		546AA05E1A5B275B9F1EAB66AF649EA9 /* Pods-Appear_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Appear_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		55AA388A0CA90FEAAACB968BA3D6839E /* Appear-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Appear-prefix.pch"; sourceTree = "<group>"; };
@@ -160,21 +160,21 @@
 		A83A5768E349BB9B42F494DCBCA4D2CD /* Appear */ = {
 			isa = PBXGroup;
 			children = (
-				4B0A0607227A34F300801A09 /* AppearApp.swift */,
-				4B0A0609227A386E00801A09 /* AppearError.swift */,
-				4B0A060B227A38E800801A09 /* HTTPResponseError.swift */,
-				4B0A060D227A393300801A09 /* WebService.swift */,
-				4B0A060F227A399200801A09 /* Endpoint.swift */,
-				4B0A061F227A453800801A09 /* AppearEndpoint.swift */,
-				4B0A0611227A39CB00801A09 /* HTTPMethod.swift */,
-				4B0A0613227A3AA700801A09 /* SimpleARViewController.swift */,
-				4B0A0615227A3AE500801A09 /* SimpleARViewController+ARSCNViewDelegate.swift */,
-				4B0A0617227A3B2000801A09 /* SimpleARViewModel.swift */,
-				4B0A0619227A3CB600801A09 /* SimpleTutorialView.swift */,
-				4B0A061B227A3CFD00801A09 /* AppearManager.swift */,
-				4B0A061D227A40CB00801A09 /* AppearProject.swift */,
-				4B0A0622227A45EC00801A09 /* SCNMaterial+Extension.swift */,
-				4B0A0624227A461000801A09 /* SCNNode+Extension.swift */,
+				4B60E55D227C742300E4E455 /* AppearApp.swift */,
+				4B60E566227C742400E4E455 /* AppearManager.swift */,
+				4B60E562227C742400E4E455 /* AppearProject.swift */,
+				4B60E564227C742400E4E455 /* Endpoint.swift */,
+				4B60E565227C742400E4E455 /* HTTPResponseError.swift */,
+				4B60E57C227C746300E4E455 /* HTTPMethod.swift */,
+				4B60E57B227C746300E4E455 /* SimpleARViewController.swift */,
+				4B60E579227C746300E4E455 /* SimpleARViewController+ARSCNViewDelegate.swift */,
+				4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */,
+				4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */,
+				4B60E55C227C742300E4E455 /* AppearEndpoint.swift */,
+				4B60E55E227C742300E4E455 /* AppearError.swift */,
+				4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */,
+				4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */,
+				4B60E55F227C742300E4E455 /* WebService.swift */,
 				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
 				E2ACDAF3D6A0025C02D7E9E1444CE7AC /* Support Files */,
 			);
@@ -418,22 +418,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B0A0610227A399200801A09 /* Endpoint.swift in Sources */,
-				4B0A0623227A45EC00801A09 /* SCNMaterial+Extension.swift in Sources */,
-				4B0A060E227A393300801A09 /* WebService.swift in Sources */,
-				4B0A061E227A40CB00801A09 /* AppearProject.swift in Sources */,
-				4B0A0608227A34F300801A09 /* AppearApp.swift in Sources */,
-				4B0A0616227A3AE500801A09 /* SimpleARViewController+ARSCNViewDelegate.swift in Sources */,
-				4B0A0620227A453800801A09 /* AppearEndpoint.swift in Sources */,
-				4B0A0618227A3B2000801A09 /* SimpleARViewModel.swift in Sources */,
-				4B0A0614227A3AA700801A09 /* SimpleARViewController.swift in Sources */,
+				4B60E56C227C742500E4E455 /* AppearApp.swift in Sources */,
+				4B60E57E227C746300E4E455 /* SimpleARViewController+ARSCNViewDelegate.swift in Sources */,
+				4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */,
+				4B60E56D227C742500E4E455 /* AppearError.swift in Sources */,
+				4B60E56E227C742500E4E455 /* WebService.swift in Sources */,
+				4B60E570227C742500E4E455 /* SCNMaterial+Extension.swift in Sources */,
 				348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */,
-				4B0A0612227A39CB00801A09 /* HTTPMethod.swift in Sources */,
-				4B0A0625227A461000801A09 /* SCNNode+Extension.swift in Sources */,
-				4B0A061A227A3CB600801A09 /* SimpleTutorialView.swift in Sources */,
-				4B0A060C227A38E800801A09 /* HTTPResponseError.swift in Sources */,
-				4B0A061C227A3CFD00801A09 /* AppearManager.swift in Sources */,
-				4B0A060A227A386E00801A09 /* AppearError.swift in Sources */,
+				4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */,
+				4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */,
+				4B60E573227C742500E4E455 /* Endpoint.swift in Sources */,
+				4B60E575227C742500E4E455 /* AppearManager.swift in Sources */,
+				4B60E574227C742500E4E455 /* HTTPResponseError.swift in Sources */,
+				4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */,
+				4B60E580227C746300E4E455 /* SimpleARViewController.swift in Sources */,
+				4B60E571227C742500E4E455 /* AppearProject.swift in Sources */,
+				4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
