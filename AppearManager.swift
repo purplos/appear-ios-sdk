@@ -32,8 +32,9 @@ public struct PresentableMedia {
 public protocol AppearManagerProtocol {
     func fetchProject(completion: @escaping (Result<AppearProjectWithMedia>) -> Void)
     //func fetchCampaignInfo(completion: @escaping (Result<ModelCampaign>) -> Void)
-    func fetchTrackingImage(from url: URL, completion: @escaping (Data?, Error?) -> Void)
-    func fetchARContent(from campaign: AppearProject, completion: @escaping (Result<AppearProjectWithMedia>) -> Void)
+    //func fetchARContent(from referenceImage: ARReferenceImage, completion: @escaping (Result<URL>) -> Void)
+    //func fetchTrackingImage(from url: URL, completion: @escaping (Data?, Error?) -> Void)
+    //func fetchARContent(from campaign: AppearProject, completion: @escaping (Result<AppearProjectWithMedia>) -> Void)
     //func fetchModel(from url: URL, completion: @escaping (URL?, Error?) -> Void)
 }
 
@@ -42,7 +43,7 @@ public class AppearManager: AppearManagerProtocol {
     public init() {
         guard AppearApp.isConfigured else { fatalError(AppearError.missingConfiguration.errorMessage)}
     }
-    
+    /*
     public func fetchCampaign(completion: @escaping (Result<AppearProject>) -> Void) {
         WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
             switch result {
@@ -57,7 +58,7 @@ public class AppearManager: AppearManagerProtocol {
                 completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
             }
         }
-    }
+    }*/
     
     public func fetchProject(completion: @escaping (Result<AppearProjectWithMedia>) -> Void) {
         WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
@@ -79,6 +80,7 @@ public class AppearManager: AppearManagerProtocol {
         }
     }
     
+    /*
     public func fetchNearbyProjects(latitude: Double, longitude: Double, completion: @escaping (Result<[AppearProject]>) -> Void) {
         WebService.sharedInstance.request(AppearEndpoint.getNearbyProjects(lat: latitude, lon: longitude)) { (result: Result<Data>) in
             switch result {
@@ -96,7 +98,46 @@ public class AppearManager: AppearManagerProtocol {
                 completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
             }
         }
+    }*/
+    
+    /*
+    
+    public func fetchARContent(from referenceImage: ARReferenceImage, completion: @escaping (Result<URL>) -> Void) {
+        WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .secondsSince1970
+                
+                guard let campaign = try? decoder.decode(AppearProject.self, from: data) else { fatalError() }
+                let items = campaign.items
+                
+                guard let name = referenceImage.name else {
+                    completion(Result.failure(AppearError.errorWithMessage("Reference image needs a name")))
+                    return
+                }
+                
+                if let item = items.first(where: {$0.name == name}) {
+                    self.fetchMediaAndStoreLocally(from: item, completion: { (result) in
+                        switch result {
+                        case .success(let url):
+                            completion(Result.success(url))
+                        case .failure(let error):
+                            completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
+                        }
+                    })
+                } else {
+                    completion(Result.failure(AppearError.errorWithMessage("No item with same name")))
+                }
+                
+            case .failure(let error):
+                completion(Result.failure( AppearError.errorWithMessage(error.localizedDescription)))
+            }
+        }
+        
     }
+ */
+    
     
     private func fetchRefrenceImages(from project: AppearProject, completion: @escaping (Result<[AppearProjectReferenceImage]>) -> Void) {
         var fetchedPresentableTrackingImages: [AppearProjectReferenceImage] = []
@@ -107,7 +148,7 @@ public class AppearManager: AppearManagerProtocol {
         for object in project.items {
             outerGroup.enter()
             
-            self.fetchTrackingImage(from: object.image.url, completion: { (imageData, error) in
+            self.fetchTrackingImage(from: object.referenceImage.url, completion: { (imageData, error) in
                 if error != nil {
                     fetchedCampaignErrors.append(error!)
                 } else {
@@ -116,7 +157,7 @@ public class AppearManager: AppearManagerProtocol {
                         outerGroup.leave()
                         return
                     }
-                    fetchedPresentableTrackingImages.append(AppearProjectReferenceImage(width: object.image.width / 100, data: data))
+                    fetchedPresentableTrackingImages.append(AppearProjectReferenceImage(width: object.referenceImage.width / 100, data: data))
                 }
                 outerGroup.leave()
             })
@@ -150,17 +191,21 @@ public class AppearManager: AppearManagerProtocol {
             let innerGroup = DispatchGroup()
             
             innerGroup.enter()
-            self.fetchTrackingImage(from: object.image.url, completion: { (imageData, error) in
+            self.fetchTrackingImage(from: object.referenceImage.url, completion: { (imageData, error) in
                 fetchImageError = error
                 fetchedImageData = imageData
                 innerGroup.leave()
             })
             
             innerGroup.enter()
-            self.fetchMediaAndStoreLocally(from: object, completion: { (mediaURL, error) in
-                fetchedMediaError = error
-                print("fetchedMediaURL = mediaURL = \(String(describing: mediaURL))")
-                fetchedMediaURL = mediaURL
+            self.fetchMediaAndStoreLocally(from: object, completion: { (result) in
+                
+                switch result {
+                case .success(let url):
+                    fetchedMediaURL = url
+                case .failure(let error):
+                    fetchedMediaError = error
+                }
                 innerGroup.leave()
             })
             
@@ -172,7 +217,7 @@ public class AppearManager: AppearManagerProtocol {
                     fetchedCampaignErrors.append(mediaError)
                     outerGroup.leave()
                 } else if let imageData = fetchedImageData, let mediaURL = fetchedMediaURL {
-                    fetchedPresentableObjects.append(AppearProjectWithMediaItem(name: object.name, type: object.type, image: AppearProjectReferenceImage(width: object.image.width / 100, data: imageData), media: PresentableMedia(localURL: mediaURL)))
+                    fetchedPresentableObjects.append(AppearProjectWithMediaItem(name: object.name, type: object.type, image: AppearProjectReferenceImage(width: object.referenceImage.width / 100, data: imageData), media: PresentableMedia(localURL: mediaURL)))
                     outerGroup.leave()
                 } else {
                     fatalError()
@@ -211,6 +256,7 @@ public class AppearManager: AppearManagerProtocol {
      }
      }*/
     
+    
     func fetchTrackingImage(from urlString: String?, completion: @escaping (Data?, Error?) -> Void) {
         guard let urlString = urlString else { fatalError() }
         let newString = urlString.replacingOccurrences(of: "http://localhost:8000", with: "http://e8e979d2.ngrok.io")
@@ -247,9 +293,9 @@ public class AppearManager: AppearManagerProtocol {
         downloadPicTask.resume()
     }
     
-    func fetchMediaAndStoreLocally(from campaign: AppearProjectItem, completion: @escaping (URL?, Error?) -> Void) {
-        fetchMedia(from: campaign) { (url, error) in
-            completion(url, error)
+    func fetchMediaAndStoreLocally(from campaign: AppearProjectItem, completion: @escaping (Result<URL>) -> Void) {
+        fetchMedia(from: campaign) { (result) in
+            completion(result)
         }
     }
     
@@ -272,66 +318,65 @@ public class AppearManager: AppearManagerProtocol {
      }*/
     
     
-    public func fetchMedia(from campaign: AppearProjectItem, completion: @escaping (URL?, Error?) -> Void) {
+    public func fetchMedia(from campaign: AppearProjectItem, completion: @escaping (Result<URL>) -> Void) {
         
-        guard let url = URL(string: campaign.media.url) else {
-            completion (nil, AppearError.errorWithMessage("no media url"))
-            return
-        }
-        
-        print(url)
-        
+        guard let url = URL(string: campaign.media.url) else { fatalError() }
         let mediaTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let dataResponse = data, error == nil else {
                 guard let error = error else {
-                    completion(nil, AppearError.errorWithMessage("No data"))
+                    completion(Result.failure(AppearError.errorWithMessage("No data")))
                     return
                 }
-                completion(nil, AppearError.errorWithMessage(error.localizedDescription))
+                completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
                 return
             }
             
-            switch campaign.type {
-            case .model:
-                let url = self.store(data: dataResponse, for: campaign)
-                completion(url, nil)
-                return
-                /*do {
-                 let unzipDirectory = try Zip.quickUnzipFile(url) // Unzip
-                 let fileManager = FileManager()
-                 let enumerator = fileManager.enumerator(at: unzipDirectory, includingPropertiesForKeys: [URLResourceKey.isDirectoryKey, URLResourceKey.localizedNameKey])
-                 guard let emr = enumerator else {
-                 completion(nil, ARCampaignError.unzipFromURLFailed)
-                 return
-                 }
-                 
-                 guard let filePaths = emr.allObjects as? [URL] else {
-                 completion(nil, ARCampaignError.unzipFromURLFailed)
-                 return
-                 }
-                 let scnFiles = filePaths.filter{URL(fileURLWithPath: $0.absoluteString, relativeTo: unzipDirectory).path.hasSuffix(".scn")}
-                 guard let scnFile = scnFiles.first else {
-                 completion(nil, ARCampaignError.unzipFromURLFailed)
-                 return
-                 }
-                 completion(scnFile, nil)
-                 return
-                 } catch (let error) {
-                 print(error.localizedDescription)
-                 completion(nil, ARCampaignError.unzipFromURLFailed)
-                 return
-                 }*/
-            case .video:
-                let url = self.store(data: dataResponse, for: campaign)
-                completion(url, nil)
-                return
-            }
+            let url = self.store(data: dataResponse, for: campaign)
+            completion(Result.success(url))
+            return
         }
         mediaTask.resume()
+        
+        /*
+        switch campaign.media {
+        case .video(let videoMedia):
+            let mediaTask = URLSession.shared.dataTask(with: videoMedia.url) { (data, response, error) in
+                guard let dataResponse = data, error == nil else {
+                    guard let error = error else {
+                        completion(Result.failure(AppearError.errorWithMessage("No data")))
+                        return
+                    }
+                    completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
+                    return
+                }
+                
+                let url = self.store(data: dataResponse, for: campaign)
+                completion(Result.success(url))
+                return
+            }
+            mediaTask.resume()
+        case .model(let modelMedia):
+            let mediaTask = URLSession.shared.dataTask(with: modelMedia.url) { (data, response, error) in
+                guard let dataResponse = data, error == nil else {
+                    guard let error = error else {
+                        completion(Result.failure(AppearError.errorWithMessage("No data")))
+                        return
+                    }
+                    completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
+                    return
+                }
+                
+                let url = self.store(data: dataResponse, for: campaign)
+                completion(Result.success(url))
+                return
+            }
+            mediaTask.resume()
+        case .unsupported:
+            completion(Result.failure(AppearError.errorWithMessage("unsupportet type")))
+        }*/
     }
     
     private func store(data: Data, for campaignObject: AppearProjectItem) -> URL {
-        
         let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
         let targetURL: URL
         switch campaignObject.type {
@@ -354,36 +399,19 @@ public class AppearManager: AppearManagerProtocol {
 
 
 var testJSON = """
-        [{
-        "type": "private",
-        "id": "flksdjf213",
-        "items": [{
-                "type": "video",
-                "name": "test1",
-                "image": {
-                    "width": 0.13,
-                    "url": "https://i.imgur.com/u2VrRJF.jpg",
-                    "found_locations": [{
-                        "latitude": 59.2463957,
-                        "longitude": 10.347494
-                    }]
-                },
-                "media": {
-                    "url": "https://hqwallpaper.ams3.cdn.digitaloceanspaces.com/A4AD374C-7840-4E01-AC07-7F9BB182584E.MP4"
-                }
-            },
-            {
-                "type": "model",
-                "name": "test2",
-                "image": {
-                    "width": 0.13,
-                    "url": "https://i.imgur.com/ekRmTH4.jpg"
-                },
-                "media": {
-                    "url": "https://hqwallpaper.ams3.cdn.digitaloceanspaces.com/trophy.zip"
-                }
-            }
-        ]
-    }]
+        {"items": [{
+                    "type": "video",
+                    "name": "test1",
+                    "referenceImage": {
+                        "width": 13,
+                        "url": "https://i.imgur.com/u2VrRJF.jpg"
+                    },
+                    "media": {
+                        "url": "https://hqwallpaper.ams3.cdn.digitaloceanspaces.com/A4AD374C-7840-4E01-AC07-7F9BB182584E.MP4",
+                        "contentMode": "scaleToFill"
+                    }
+
+        }]
+    }
  """.data(using: .utf8)!
 

@@ -36,5 +36,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>Appear-Example requires access to your phone’s camera.</string>
 </dict>
 </plist>

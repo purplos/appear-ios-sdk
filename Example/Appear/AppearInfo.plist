@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>BaseURL</key>
+    <string>https://api.geit.no</string>
+    <key>ProjectID</key>
+    <string>bj61jfi23akg026pcurg</string>
+    <key>BundleID</key>
+    <string>no.purpl.Appear-Example</string>
+    <key>APIKey</key>
+    <string>d2d82847-e771-4ad1-b6aa-5679c73a6557</string>
+  </dict>
+</plist>
