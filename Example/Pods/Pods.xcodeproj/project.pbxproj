@@ -27,7 +27,6 @@
 		4B0A0625227A461000801A09 /* SCNNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A0624227A461000801A09 /* SCNNode+Extension.swift */; };
 		7F307265E1A510B4A51902EB16CCF4F4 /* Pods-Appear_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B967E15AC5C8995CC6608E06552175 /* Pods-Appear_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D2BBDB6F6699F92D205075679CBA2AA /* Pods-Appear_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AA63E4BAD0A8E82A57FA6AD25770C3 /* Pods-Appear_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9664C52174BCC6AEEDCE1C8AE02E0387 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4619BDA9DC655C318D2DB372D3575828 /* ReplaceMe.swift */; };
 		A504EE8D713B0F2114F44338773E2DE9 /* Pods-Appear_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA42C8B017A35D88F296F4E5260EDE0 /* Pods-Appear_Example-dummy.m */; };
 		E16ACF3632FC617871E83FD5A216B3FE /* Pods-Appear_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D5CDD75137271C1F45A6147447387B /* Pods-Appear_Tests-dummy.m */; };
 		E18602DC3CEAF0C3792656F171F4C987 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
@@ -55,7 +54,6 @@
 		2AECBCFD76FCA669A784A1187DF96492 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329C67ABBA76BD3BACA30D01F08A38F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41152CEFAEC90A51D7B6FE32E3F69EED /* Pods-Appear_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Appear_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		4619BDA9DC655C318D2DB372D3575828 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = Appear/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		4B0A0607227A34F300801A09 /* AppearApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearApp.swift; sourceTree = "<group>"; };
 		4B0A0609227A386E00801A09 /* AppearError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearError.swift; sourceTree = "<group>"; };
 		4B0A060B227A38E800801A09 /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
@@ -162,9 +160,6 @@
 		A83A5768E349BB9B42F494DCBCA4D2CD /* Appear */ = {
 			isa = PBXGroup;
 			children = (
-				4619BDA9DC655C318D2DB372D3575828 /* ReplaceMe.swift */,
-				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
-				E2ACDAF3D6A0025C02D7E9E1444CE7AC /* Support Files */,
 				4B0A0607227A34F300801A09 /* AppearApp.swift */,
 				4B0A0609227A386E00801A09 /* AppearError.swift */,
 				4B0A060B227A38E800801A09 /* HTTPResponseError.swift */,
@@ -180,6 +175,8 @@
 				4B0A061D227A40CB00801A09 /* AppearProject.swift */,
 				4B0A0622227A45EC00801A09 /* SCNMaterial+Extension.swift */,
 				4B0A0624227A461000801A09 /* SCNNode+Extension.swift */,
+				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
+				E2ACDAF3D6A0025C02D7E9E1444CE7AC /* Support Files */,
 			);
 			name = Appear;
 			path = ../..;
@@ -434,7 +431,6 @@
 				4B0A0612227A39CB00801A09 /* HTTPMethod.swift in Sources */,
 				4B0A0625227A461000801A09 /* SCNNode+Extension.swift in Sources */,
 				4B0A061A227A3CB600801A09 /* SimpleTutorialView.swift in Sources */,
-				9664C52174BCC6AEEDCE1C8AE02E0387 /* ReplaceMe.swift in Sources */,
 				4B0A060C227A38E800801A09 /* HTTPResponseError.swift in Sources */,
 				4B0A061C227A3CFD00801A09 /* AppearManager.swift in Sources */,
 				4B0A060A227A386E00801A09 /* AppearError.swift in Sources */,
