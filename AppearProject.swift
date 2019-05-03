@@ -38,13 +38,10 @@ public struct TrackingImage: Decodable {
     public let width: Float32
     public let url: String
 }
-
+/*
 public struct Media: Decodable {
     public let url: String
-}
-
-
-/*
+}*/
 
 public enum Media {
     case video(VideoMedia)
@@ -92,4 +89,3 @@ public enum ContentMode: String, Decodable {
     case aspectFit
 }
 
-*/

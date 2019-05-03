@@ -319,7 +319,7 @@ public class AppearManager: AppearManagerProtocol {
     
     
     public func fetchMedia(from campaign: AppearProjectItem, completion: @escaping (Result<URL>) -> Void) {
-        
+        /*
         guard let url = URL(string: campaign.media.url) else { fatalError() }
         let mediaTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let dataResponse = data, error == nil else {
@@ -336,8 +336,8 @@ public class AppearManager: AppearManagerProtocol {
             return
         }
         mediaTask.resume()
+        */
         
-        /*
         switch campaign.media {
         case .video(let videoMedia):
             let mediaTask = URLSession.shared.dataTask(with: videoMedia.url) { (data, response, error) in
@@ -373,7 +373,7 @@ public class AppearManager: AppearManagerProtocol {
             mediaTask.resume()
         case .unsupported:
             completion(Result.failure(AppearError.errorWithMessage("unsupportet type")))
-        }*/
+        }
     }
     
     private func store(data: Data, for campaignObject: AppearProjectItem) -> URL {
