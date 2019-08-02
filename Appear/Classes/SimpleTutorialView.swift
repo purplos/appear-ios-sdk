@@ -23,7 +23,7 @@ public class SimpleTutorialView: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .white
-        label.text = "Hold the camere towards the image"
+        label.text = "Hold the camere towards a trigger image or object"
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ public class SimpleTutorialView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "Once the image is detected the 3D content will be displayed in AR"
+        label.text = "Once the trigger is detected the augmented content will appear"
         return label
     }()
     

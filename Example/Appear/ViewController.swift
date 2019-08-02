@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let simpleVC = SimpleARViewController()
-        present(simpleVC, animated: true, completion: nil)
+        let triggerVC = TriggerARViewController()
+        present(triggerVC, animated: true, completion: nil)
     }
 
 }

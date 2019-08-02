@@ -19,8 +19,6 @@ extension Endpoint {
     
     func requestforEndpoint(_ path: String, baseURL: URL? = nil) throws -> URLRequest{
         let baseURL = baseURL ?? baseUrl
-        print(path)
-        print(baseURL)
         guard let url = URL(string: path, relativeTo: baseURL) else {
             fatalError()
         }
@@ -38,8 +36,7 @@ extension Endpoint {
         request.httpMethod      = httpMethod.rawValue
         
         if let apiKey = AppearApp.apiKeyString {
-            print(apiKey)
-            request.addValue(apiKey, forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

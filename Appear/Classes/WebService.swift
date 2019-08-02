@@ -26,6 +26,7 @@ public class WebService {
             print("Body: \(String.init(data: httpBody, encoding: .utf8)!)")
         }
         
+        print(endpoint.httpMethod)
         let token = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         let task = self.urlSession.dataTask(with: endpoint.request) { [unowned self] (data, response, error) in
             self.logCall(jsonData: data, responseError: error, response: response)

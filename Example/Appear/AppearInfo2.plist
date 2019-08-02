@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>BaseURL</key>
-	<string>https://api.geit.no</string>
-	<key>CampaignID</key>
-	<string>bj61jfi23akg026pcurg</string>
+	<string>https://5aab37c8.ngrok.io</string>
+	<key>ProjectID</key>
+	<string>91024B90-C892-4E9E-A37B-63A3D2FBBF70</string>
 	<key>BundleID</key>
 	<string>no.purpl.Appear-Example</string>
 	<key>APIKey</key>
-	<string>d2d82847-e771-4ad1-b6aa-5679c73a6557</string>
+	<string>bbwbDAVZ42KTiHXbHzp!5SavVTTl65z2</string>
 </dict>
 </plist>

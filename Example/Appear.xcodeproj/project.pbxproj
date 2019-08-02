@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B09CE8922E3A143005DDD55 /* AppearInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B09CE8822E3A143005DDD55 /* AppearInfo.plist */; };
 		4B0A0629227B9D8E00801A09 /* Appear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A0628227B9D8E00801A09 /* Appear.framework */; };
-		4B63615D227C51C6006513D9 /* ARCampaignInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B63615C227C51C5006513D9 /* ARCampaignInfo.plist */; };
-		4B63615F227C598A006513D9 /* AppearInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B63615E227C598A006513D9 /* AppearInfo.plist */; };
+		4B5A11BB22B14508003C53B2 /* AppearInfo2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B5A11BA22B14508003C53B2 /* AppearInfo2.plist */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -32,9 +32,9 @@
 
 /* Begin PBXFileReference section */
 		299E14EAA919657BF8EE0C6C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4B09CE8822E3A143005DDD55 /* AppearInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AppearInfo.plist; sourceTree = "<group>"; };
 		4B0A0628227B9D8E00801A09 /* Appear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Appear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B63615C227C51C5006513D9 /* ARCampaignInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ARCampaignInfo.plist; sourceTree = "<group>"; };
-		4B63615E227C598A006513D9 /* AppearInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppearInfo.plist; sourceTree = "<group>"; };
+		4B5A11BA22B14508003C53B2 /* AppearInfo2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppearInfo2.plist; sourceTree = "<group>"; };
 		4EE91F973A35A6A604911C15 /* Pods-Appear_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Appear_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Appear_Example/Pods-Appear_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5D0763B78126158A21DC7FAE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Appear_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appear_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,9 +102,9 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				4B5A11BA22B14508003C53B2 /* AppearInfo2.plist */,
+				4B09CE8822E3A143005DDD55 /* AppearInfo.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				4B63615E227C598A006513D9 /* AppearInfo.plist */,
-				4B63615C227C51C5006513D9 /* ARCampaignInfo.plist */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -259,9 +259,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B63615D227C51C6006513D9 /* ARCampaignInfo.plist in Resources */,
-				4B63615F227C598A006513D9 /* AppearInfo.plist in Resources */,
+				4B09CE8922E3A143005DDD55 /* AppearInfo.plist in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				4B5A11BB22B14508003C53B2 /* AppearInfo2.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
