@@ -28,7 +28,7 @@ extension TriggerARViewController: ARSCNViewDelegate {
             fetchMediaWithArchiveURL(from: detectedTriggerItem) { (result) in
                 switch result {
                 case .success(let mediaWithArchiveURLArray):
-                    var group = DispatchGroup()
+                    let group = DispatchGroup()
                     var animatableNodes: [MediaWithNode] = []
                     for mediaWithArchiveURL in mediaWithArchiveURLArray {
                         switch mediaWithArchiveURL.media.type {
@@ -110,7 +110,7 @@ extension TriggerARViewController: ARSCNViewDelegate {
             fetchMediaWithArchiveURL(from: detectedTriggerItem) { (result) in
                 switch result {
                 case .success(let mediaWithArchiveURLArray):
-                    var group = DispatchGroup()
+                    let group = DispatchGroup()
                     var animatableNodes: [MediaWithNode] = []
                     for mediaWithArchiveURL in mediaWithArchiveURLArray {
                         switch mediaWithArchiveURL.media.type {
@@ -275,6 +275,8 @@ extension TriggerARViewController: ARSCNViewDelegate {
                     completion(Result.success(modelNode))
                     
                 } else if let imageAnchor = anchor as? ARImageAnchor {
+                    
+                    print(imageAnchor.referenceImage.name ?? "")
                     
                     // Set position of model relative to the plane
                     modelNode.position = SCNVector3(node.position.x + Float(media.position?[0] ?? 0.0),

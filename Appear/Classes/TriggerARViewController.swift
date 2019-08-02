@@ -72,7 +72,6 @@ public class TriggerARViewController: UIViewController {
             sceneView.session.run(sceneView.session.configuration!)
             for node in sceneView.scene.rootNode.childNodes {
                 if let videoNode = node as? AppearVideoNode {
-                    print(videoNode.name)
                     videoNode.avPlayer.play()
                 }
             }
@@ -91,7 +90,7 @@ public class TriggerARViewController: UIViewController {
         viewModel.fetchProject { (result) in
             switch result {
             case .success(let project):
-                print("successfully fetched project with id: \(project.id)")
+                print("successfully fetched project with id: \(String(describing: project.id))")
                 for item in project.items {
                     // Handle triggers
                     group.enter()
@@ -175,7 +174,7 @@ public class TriggerARViewController: UIViewController {
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty{
                 let tappedNode = hits.first?.node
-                print(tappedNode?.name)
+                print(tappedNode?.name ?? "tapped node with no name")
                 for hit in hits {
                     for item in viewModel.triggers {
                         for media in item.0.media {

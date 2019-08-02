@@ -1,10 +1,8 @@
 # Appear iOS SDK
 
-Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. More information about Appear can be found at [https://ar.purpl.dev](https://ar.purpl.dev)
+Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. More information about Appear can be found at [https://appear.media](https://appear.media)
 
 ## Install the SDK
-
-Go to the [Appear Console](https://ar.purpl.dev) and create a project. 
 
 ### Prerequisites
 
@@ -17,8 +15,8 @@ Before you begin, you need a few things set up in your environment:
 
 ### Add the SDK
 
-Go to the [Appear Console](https://ar.purpl.dev) and create a project, then enter a Project name.
-Enter the bundle identifier from your XCode Project and upload pictures and models.
+Go to the [Appear Console](https://appear.media) and create a project, then enter a Project name.
+Enter the bundle identifier from your XCode Project and upload triggers and assosiated Augmented Reality Media files.
 Download the plist file and drag it into your XCode Project
 
 ### Add The Appear Framwork to your project
@@ -53,39 +51,38 @@ Remember to add a NSCameraUsageDescription to your project if you havent already
 
 ## Usage
 
-With the Appear Framework added to your project you can easly create a SimpleARViewController or use your own fully customizable UIViewController. 
+With the Appear Framework added to your project you can easly create a TriggerARViewController or use your own fully customizable UIViewController. 
 
 ### Quick and easy implementation
 
-Initilize an instance of the SimpleARViewController  and present it. And thats it!
+Initilize an instance of the TriggerARViewController  and present it. And thats it!
 
 ```swift
-let simpleVC = SimpleARViewController()
+let triggerVC = TriggerARViewController()
 present(simpleVC, animated: true, completion: nil)
 ```
 
-You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the SimpleARViewController before you present it.
+You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the TriggerARViewController before you present it.
 
 ```swift
 // create an instance of your own subclass of UIView
 let customTutorialView = CustomTutorialView()
 
-// create an instance of the SimpleARViewController
-let simpleVC = SimpleARViewController()
+// create an instance of the TriggerARViewController
+let triggerVC = TriggerARViewController()
 
 // replace the tutorialView
-simpleVC.tutorialView = customTutorialView
+triggerVC.tutorialView = customTutorialView
 
 // present 
-present(simpleVC, animated: true, completion: nil)
+present(triggerVC, animated: true, completion: nil)
 ```
 
 ### Advanced implementation
 
-Create an instance of AppearManager in your own ViewController and get access to the model, tracking image and image width.
+Create an instance of AppearManager in your own ViewController and get access to all the project assets. 
 
-
-The AppearManager class also has methods for getting the model and the tracking image information separately.
+More info will come**
 
 ## Versioning
 
