@@ -9,12 +9,12 @@ import UIKit
 import SceneKit
 import AVKit
 
-class AppearVideoNode: SCNNode {
+public class AppearVideoNode: SCNNode {
     
-    var plane: SCNPlane!
-    var avPlayer: AVPlayer!
+    public var plane: SCNPlane!
+    public var avPlayer: AVPlayer!
     
-    init(videoArchiveURL: URL, media: AppearProjectItem.VideoMedia) {
+    public init(videoArchiveURL: URL, media: AppearProjectItem.VideoMedia) {
         super.init()
         
         self.plane = SCNPlane(width: CGFloat(0.1), height: CGFloat(0.10 * 2.16))

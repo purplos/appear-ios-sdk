@@ -245,51 +245,27 @@ extension TriggerARViewController: ARSCNViewDelegate {
     private func createModel(from url: URL, with media: AppearProjectItem.ModelMedia, relativeTo node: SCNNode, for anchor: ARAnchor, completion: @escaping (Result<SCNNode>) -> Void) {
         // get a global concurrent queue
         DispatchQueue.global(qos: .background).async {
-            do {
-                let scene = try SCNScene.init(url: url, options: nil)
-                let modelNode = scene.rootNode
+            var modelNode = AppearModelNode(archiveURL: url, modelMedia: media)
+            // scale so that test model will be correct size
+            modelNode.scale = SCNVector3(0, 0, 0)
+            
+            if let objectAnchor = anchor as? ARObjectAnchor {
+                // Set position of model relative to the object
+                modelNode.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(media.position?[0] ?? 0.0), objectAnchor.referenceObject.center.y + Float(media.position?[1] ?? 0.0), objectAnchor.referenceObject.center.z + Float(media.position?[2] ?? 0.0))
+                completion(Result.success(modelNode))
                 
-                // set name
-                modelNode.name = media.name
+            } else if let imageAnchor = anchor as? ARImageAnchor {
                 
-                // create and add a light to the scene
-                let lightNode = SCNNode()
-                lightNode.light = SCNLight()
-                lightNode.light!.type = .omni
-                lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-                //modelNode.addChildNode(lightNode)
+                print(imageAnchor.referenceImage.name ?? "")
                 
-                // create and add an ambient light to the scene
-                let ambientLightNode = SCNNode()
-                ambientLightNode.light = SCNLight()
-                ambientLightNode.light!.type = .ambient
-                ambientLightNode.light!.color = UIColor.darkGray
-                //modelNode.addChildNode(ambientLightNode)
+                // Set position of model relative to the plane
+                modelNode.position = SCNVector3(node.position.x + Float(media.position?[0] ?? 0.0),
+                                                node.position.y + Float(media.position?[1] ?? 0.0),
+                                                node.position.z + Float(media.position?[2] ?? 0.0))
                 
-                // scale so that test model will be correct size
-                modelNode.scale = SCNVector3(0, 0, 0)
-                
-                if let objectAnchor = anchor as? ARObjectAnchor {
-                    // Set position of model relative to the object
-                    modelNode.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(media.position?[0] ?? 0.0), objectAnchor.referenceObject.center.y + Float(media.position?[1] ?? 0.0), objectAnchor.referenceObject.center.z + Float(media.position?[2] ?? 0.0))
-                    completion(Result.success(modelNode))
-                    
-                } else if let imageAnchor = anchor as? ARImageAnchor {
-                    
-                    print(imageAnchor.referenceImage.name ?? "")
-                    
-                    // Set position of model relative to the plane
-                    modelNode.position = SCNVector3(node.position.x + Float(media.position?[0] ?? 0.0),
-                                                    node.position.y + Float(media.position?[1] ?? 0.0),
-                                                    node.position.z + Float(media.position?[2] ?? 0.0))
-                    
-                    // Add to scene
-                    let modelNodeClone = modelNode.clone()
-                    completion(Result.success(modelNodeClone))
-                }
-                
-            } catch (let error) {
-                fatalError(error.localizedDescription)
+                // Add to scene
+                let modelNodeClone = modelNode.clone()
+                completion(Result.success(modelNodeClone))
             }
         }
     }

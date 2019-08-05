@@ -19,12 +19,12 @@ public protocol TriggerProtocol: Decodable {
 }
 
 public struct AppearProject: Decodable {
-    let id: UUID?
-    let type: APIProjectType
-    let name: String
-    let start: Date?
-    let end: Date?
-    var items: [AppearProjectItem]
+    public let id: UUID?
+    public let type: APIProjectType
+    public let name: String
+    public let start: Date?
+    public let end: Date?
+    public var items: [AppearProjectItem]
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -35,7 +35,7 @@ public struct AppearProject: Decodable {
         case items
     }
     
-    enum APIProjectType: String, Codable {
+    public enum APIProjectType: String, Codable {
         case trigger
         case placement
         case location
@@ -55,10 +55,10 @@ extension AppearProject {
 }
 
 public struct AppearProjectItem: Decodable {
-    let id: UUID
-    let name: String
-    var trigger: TriggerProtocol
-    var media: [MediaProtocol]
+    public let id: UUID
+    public let name: String
+    public var trigger: TriggerProtocol
+    public var media: [MediaProtocol]
 }
 
 extension AppearProjectItem {
@@ -67,35 +67,31 @@ extension AppearProjectItem {
         public let name: String
         public let type: MediaType
         public let url: String
-        let contentMode: ContentMode
-        let autoRepeat: Bool?
-        let position: [Double]?
-        let scale: Float32?
-        let delay: Float32?
+        public let contentMode: ContentMode
+        public let autoRepeat: Bool?
+        public let position: [Double]?
+        public let scale: Float32?
+        public let delay: Float32?
     }
     
     public struct ModelMedia: MediaProtocol {
         public let name: String
         public let type: MediaType
         public let url: String
-        let scale: Float32
-        let autoRepeat: Bool?
-        let position: [Double]?
-        let delay: Float32?
+        public let scale: Float32
+        public let autoRepeat: Bool?
+        public let position: [Double]?
+        public let delay: Float32?
     }
     
     public struct TextMedia: MediaProtocol {
         public var type: AppearProjectItem.MediaType
-        
         public var url: String
-        
         public var name: String
-        
-        
     }
     
     public struct ImageMedia: TriggerProtocol {
-        let width: Float32?
+        public let width: Float32?
         public let type: TriggerType
         public let url: String
     }

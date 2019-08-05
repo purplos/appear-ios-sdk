@@ -45,7 +45,6 @@ public class TriggerARViewController: UIViewController {
     let viewModel: SimpleARViewModel = SimpleARViewModel()
     private var customReferenceSet = Set<ARReferenceImage>()
     private var customOjectReferenceSet = Set<ARReferenceObject>()
-    var contentMode = MediaContentMode.scaleToFill
     var initialAppear = true
     
     
@@ -65,8 +64,6 @@ public class TriggerARViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
         
         guard initialAppear else {
             sceneView.session.run(sceneView.session.configuration!)

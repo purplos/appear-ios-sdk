@@ -30,7 +30,7 @@ extension AppearManager: AppearManagerProtocol {
             case .success(let data):
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
-                print(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
+                //print(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
                 guard let project = try? decoder.decode(AppearProject.self, from: data) else { fatalError() }
                 completion(Result.success(project))
             case .failure(let error):

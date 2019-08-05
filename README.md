@@ -21,7 +21,7 @@ Download the plist file and drag it into your XCode Project
 
 ### Add The Appear Framwork to your project
 
-Appear is available through [CocoaPods](https://cocoapods.org). To install
+Appear is available through [CocoaPods](https://cocoapods.org/pods/Appear). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -82,7 +82,64 @@ present(triggerVC, animated: true, completion: nil)
 
 Create an instance of AppearManager in your own ViewController and get access to all the project assets. 
 
-More info will come**
+Fetching the project: 
+
+```swift
+// create an instance of the AppearManager
+let manager = AppearManager()
+
+// fetch the project
+manager.fetchProject { (result) in
+    switch result {
+    case .success(let project):
+        print(project)
+    case .failure(let error):
+        // Handle error here
+    }
+}
+```
+
+After having fetched the project you can fetch the triggers and agumented media files using the AppearManager.
+
+Fetching the triggers:
+```swift
+for item in project.items {
+    manager.fetchTriggerArchiveUrl(from: item, completion: { (result) in
+        switch result {
+        case .success(let url):
+            switch item.trigger.type {
+            case .image:
+                // create a reference image with the URL and add it to a set of ARReferenceImage
+            case .object:
+                // create a reference object with the URL and add it to a set of ARReferenceObject
+            }
+        case .failure(let error):
+            fatalError(error.localizedDescription)
+        }
+    })
+}
+```
+
+Fetching the Augmented Media: 
+```swift
+for media in item.media {
+    manager.fetchMediaArchiveUrl(from: media, completion: { (result) in
+        switch result {
+        case .success(let url):
+            switch media.type {
+            case .model:
+                let modelNode = AppearModelNode(archiveURL: url, modelMedia: media as! AppearProjectItem.ModelMedia)
+                // do something with the modelNode.
+            case .video:
+                let videoNode = AppearVideoNode(videoArchiveURL: url, media: media as! AppearProjectItem.VideoMedia)
+                // do something with the videoNode
+            }
+        case .failure(let error):
+            fatalError(error.localizedDescription)
+        }
+    })
+}
+```
 
 ## Versioning
 
