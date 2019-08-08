@@ -1,7 +1,7 @@
 ![Header](https://raw.githubusercontent.com/purplos/appear-ios-sdk/master/Skjermbilde%202019-08-08%20kl.%2014.54.47.png)
 # Appear iOS SDK
 
-Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. More information about Appear can be found at [https://appear.media](https://appear.media)
+Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. This framework allows you to upload Augmented Reality assets to a database and access them in your app whenever they are needed.
 
 ## Quick Overview
 [![Object Detection Gif](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)
