@@ -5,9 +5,9 @@ Appear is an app development platform with tools to help you build apps with dyn
 ## Quick Overview
 [![Object Detection Gif](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)
 
-✅ Image detection
-✅ Object Detection
-✅ Display usdz models
+✅ Image detection <br/>
+✅ Object Detection <br/>
+✅ Display usdz models <br/>
 ✅ Display .mov and mp4 videos
 
 ## Install the SDK
