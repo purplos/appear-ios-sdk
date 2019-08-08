@@ -23,6 +23,8 @@
 		4B60E580227C746300E4E455 /* TriggerARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57B227C746300E4E455 /* TriggerARViewController.swift */; };
 		4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57C227C746300E4E455 /* HTTPMethod.swift */; };
 		4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
+		4B74B3D522FC3FE6007A9406 /* AppearDebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */; };
+		4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */; };
 		4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9722F44989008A01D2 /* AppearManager.swift */; };
 		4B9C8A9E22F44989008A01D2 /* AppearModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */; };
 		4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */; };
@@ -74,6 +76,8 @@
 		4B60E57B227C746300E4E455 /* TriggerARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TriggerARViewController.swift; path = Appear/Classes/TriggerARViewController.swift; sourceTree = "<group>"; };
 		4B60E57C227C746300E4E455 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Appear/Classes/HTTPMethod.swift; sourceTree = "<group>"; };
 		4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleTutorialView.swift; path = Appear/Classes/SimpleTutorialView.swift; sourceTree = "<group>"; };
+		4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugOptions.swift; path = Appear/Classes/AppearDebugOptions.swift; sourceTree = "<group>"; };
+		4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugger.swift; path = Appear/Classes/AppearDebugger.swift; sourceTree = "<group>"; };
 		4B9C8A9722F44989008A01D2 /* AppearManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearManager.swift; path = Appear/Classes/AppearManager.swift; sourceTree = "<group>"; };
 		4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearModelNode.swift; path = Appear/Classes/AppearModelNode.swift; sourceTree = "<group>"; };
 		4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearVideoNode.swift; path = Appear/Classes/AppearVideoNode.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				4BDA62A322F4493800A4E99A /* FeatureNode.swift */,
 				4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */,
 				4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */,
+				4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */,
+				4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */,
 				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
 				E2ACDAF3D6A0025C02D7E9E1444CE7AC /* Support Files */,
 			);
@@ -442,6 +448,7 @@
 			files = (
 				4B9C8A9E22F44989008A01D2 /* AppearModelNode.swift in Sources */,
 				4B60E56C227C742500E4E455 /* AppearApp.swift in Sources */,
+				4B74B3D522FC3FE6007A9406 /* AppearDebugOptions.swift in Sources */,
 				4B60E57E227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift in Sources */,
 				4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */,
 				4B60E56D227C742500E4E455 /* AppearError.swift in Sources */,
@@ -460,6 +467,7 @@
 				4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */,
 				4B60E580227C746300E4E455 /* TriggerARViewController.swift in Sources */,
 				4BDA62A022F446FE00A4E99A /* AppearProject.swift in Sources */,
+				4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */,
 				4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */,
 				4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */,
 			);

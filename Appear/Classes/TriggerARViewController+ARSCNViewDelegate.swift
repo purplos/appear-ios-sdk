@@ -67,7 +67,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                         }
                     }
                     group.notify(queue: DispatchQueue.main) {
-                        print("group.notify")
                         // animate nodes. Use delay on media to time the animations
                         self.hideObjectLoader(node: node, completion: {
                             for animatableNode in animatableNodes {
@@ -90,7 +89,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                                     })
                                 }
                             }
-                            print(animatableNodes.count)
                         })
                     }
                 case .failure(let error):
@@ -117,7 +115,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                         case .model:
                             guard let modelMedia = mediaWithArchiveURL.media as? AppearProjectItem.ModelMedia else { fatalError() }
                             group.enter()
-                            print("enter")
                             self.createModel(from: mediaWithArchiveURL.archiveURL,
                                              with: modelMedia,
                                              relativeTo: planeNode,
@@ -127,7 +124,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                                                 case .success(let modelNode):
                                                     animatableNodes.append((media: modelMedia, node: modelNode))
                                                     group.leave()
-                                                    print("leave")
                                                 case .failure(let error):
                                                     fatalError(error.localizedDescription)
                                                 }
@@ -135,7 +131,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                         case .video:
                             guard let videoMedia = mediaWithArchiveURL.media as? AppearProjectItem.VideoMedia else { fatalError() }
                             group.enter()
-                            print("enter")
                             self.createVideo(from: mediaWithArchiveURL.archiveURL,
                                              with: videoMedia,
                                              relativeTo: planeNode,
@@ -145,8 +140,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                                                 case .success(let videoNode):
                                                     animatableNodes.append((media: videoMedia, node: videoNode))
                                                     group.leave()
-                                                    print("leave")
-                                                    print(animatableNodes.count)
                                                 case .failure(let error):
                                                     fatalError(error.localizedDescription)
                                                 }
@@ -155,7 +148,6 @@ extension TriggerARViewController: ARSCNViewDelegate {
                     }
                     
                     group.notify(queue: DispatchQueue.main) {
-                        print("group.notify")
                         // animate nodes. Use delay on media to time the animations
                         self.stopPlaneLoading(node: node, completion: {
                             for animatableNode in animatableNodes {
@@ -245,79 +237,18 @@ extension TriggerARViewController: ARSCNViewDelegate {
     private func createModel(from url: URL, with media: AppearProjectItem.ModelMedia, relativeTo node: SCNNode, for anchor: ARAnchor, completion: @escaping (Result<SCNNode>) -> Void) {
         // get a global concurrent queue
         DispatchQueue.global(qos: .background).async {
-            var modelNode = AppearModelNode(archiveURL: url, modelMedia: media)
-            // scale so that test model will be correct size
-            modelNode.scale = SCNVector3(0, 0, 0)
-            
-            if let objectAnchor = anchor as? ARObjectAnchor {
-                // Set position of model relative to the object
-                modelNode.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(media.position?[0] ?? 0.0), objectAnchor.referenceObject.center.y + Float(media.position?[1] ?? 0.0), objectAnchor.referenceObject.center.z + Float(media.position?[2] ?? 0.0))
-                completion(Result.success(modelNode))
-                
-            } else if let imageAnchor = anchor as? ARImageAnchor {
-                
-                print(imageAnchor.referenceImage.name ?? "")
-                
-                // Set position of model relative to the plane
-                modelNode.position = SCNVector3(node.position.x + Float(media.position?[0] ?? 0.0),
-                                                node.position.y + Float(media.position?[1] ?? 0.0),
-                                                node.position.z + Float(media.position?[2] ?? 0.0))
-                
-                // Add to scene
-                let modelNodeClone = modelNode.clone()
-                completion(Result.success(modelNodeClone))
-            }
+            var modelNode = AppearModelNode(archiveURL: url, modelMedia: media, node: node, anchor: anchor)
+            modelNode.scale = SCNVector3(0, 0, 0) // scale to 0 so we can make it pop in
+            completion(Result.success(modelNode))
         }
     }
     
     private func createVideo(from url: URL, with media: AppearProjectItem.VideoMedia , relativeTo node: SCNNode, for anchor: ARAnchor, completion: @escaping (Result<SCNNode>) -> Void) {
             DispatchQueue.global(qos: .background).async {
-                if let objectAnchor = anchor as? ARObjectAnchor {
-                    let videoNode = AppearVideoNode(videoArchiveURL: url, media: media)
-                    videoNode.opacity = 0
-                    videoNode.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(media.position?[0] ?? 0.0),
-                                                    objectAnchor.referenceObject.center.y + Float(media.position?[1] ?? 0.0),
-                                                    objectAnchor.referenceObject.center.z + Float(media.position?[2] ?? 0.0))
-                    completion(Result.success(videoNode))
-                    
-                } else if let imageAnchor = anchor as? ARImageAnchor {
-                    let imageSize = imageAnchor.referenceImage.physicalSize
-                    let videoNode = AppearVideoNode(videoArchiveURL: url, media: media)
-                    switch media.contentMode {
-                    case .scaleToFill:
-                        videoNode.plane.width = CGFloat(imageSize.width)
-                        videoNode.plane.height =  CGFloat(imageSize.height)
-                    case .aspectFill:
-                        videoNode.plane.height = CGFloat(imageSize.height)
-                        guard let url = self.urlOfCurrentlyPlaying(in: videoNode.avPlayer) else { fatalError() }
-                        let resolution = self.resolutionSizeForLocalVideo(url: url)
-                        let ratio = CGFloat(resolution!.width/resolution!.height)
-                        let width = imageSize.height * ratio
-                        videoNode.plane.width = width
-                    }
-                    
-                    videoNode.plane.width = videoNode.plane.width * CGFloat(media.scale ?? 1)
-                    videoNode.plane.height = videoNode.plane.height * CGFloat(media.scale ?? 1)
-                    
-                    videoNode.position.x = videoNode.position.x + Float((media.position?[0] ?? 0))
-                    videoNode.position.y = videoNode.position.y + Float((media.position?[2] ?? 0))
-                    videoNode.position.z = videoNode.position.z + Float((media.position?[1] ?? 0))
-                    
-                    print("video added to scene")
-                    videoNode.opacity = 0
-                    completion(Result.success(videoNode))
-                }
+                let videoNode = AppearVideoNode(videoArchiveURL: url, media: media, anchor: anchor)
+                videoNode.opacity = 0 // opacity to 0 so we can make it fade in
+                completion(Result.success(videoNode))
             }
-    }
-    
-    func resolutionSizeForLocalVideo(url: URL) -> CGSize? {
-        guard let track = AVAsset(url: url as URL).tracks(withMediaType: AVMediaType.video).first else { return nil }
-        let size = track.naturalSize.applying(track.preferredTransform)
-        return CGSize(width: abs(size.width), height: abs(size.height))
-    }
-    
-    private func urlOfCurrentlyPlaying(in player: AVPlayer) -> URL? {
-        return ((player.currentItem?.asset) as? AVURLAsset)?.url
     }
     
     public func session(_ session: ARSession, didFailWithError error: Error) {
@@ -341,11 +272,14 @@ extension TriggerARViewController: ARSessionDelegate {
     public func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
         case .notAvailable:
-            print(".notAvailable")
+            break
+            //print(".notAvailable")
         case .limited(_):
-            print("limited")
+            break
+            //print("limited")
         case .normal:
-            print("normal")
+            break
+            //print("normal")
         }
     }
 }

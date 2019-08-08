@@ -25,13 +25,18 @@ public class AppearManager {
 
 extension AppearManager: AppearManagerProtocol {
     public func fetchProject(completion: @escaping (Result<AppearProject>) -> Void) {
+        AppearLogger().debugPrint("Fetching project...")
         WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
             switch result {
             case .success(let data):
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
-                //print(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
-                guard let project = try? decoder.decode(AppearProject.self, from: data) else { fatalError() }
+                AppearLogger().debugPrint("Successfully fetched project data")
+                AppearLogger().debugPrint(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
+                guard let project = try? decoder.decode(AppearProject.self, from: data) else {
+                    AppearLogger().fatalErrorPrint("Unable to decode project data to AppearProject struct")
+                }
+                AppearLogger().debugPrint("Successfully decoded project data to AppearProject")
                 completion(Result.success(project))
             case .failure(let error):
                 completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
@@ -41,10 +46,14 @@ extension AppearManager: AppearManagerProtocol {
     
     public func fetchTriggerArchiveUrl(from item: AppearProjectItem, completion: @escaping (Result<URL>) -> Void) {
         guard let url = URL(string: item.trigger.url) else { fatalError() }
+        AppearLogger().debugPrint("Fetching trigger data with name \(item.name) from URL: \(url.absoluteString)")
         self.fetchData(from: url) { (result) in
             switch result {
             case .success(let data):
-                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else { fatalError() }
+                AppearLogger().debugPrint("Successfully fetched trigger with name \(item.name)")
+                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
+                     AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for trigger")
+                }
                 let archiveUrl = self.store(data: data, fileName: item.name, fileType: fileType)
                 completion(Result.success(archiveUrl))
             case .failure(let error):
@@ -55,10 +64,14 @@ extension AppearManager: AppearManagerProtocol {
     
     public func fetchMediaArchiveUrl(from media: MediaProtocol, completion: @escaping (Result<URL>) -> Void) {
         guard let url = URL(string: media.url) else { fatalError() }
+        AppearLogger().debugPrint("Fetching augmented media data with name \(media.name) from URL: \(url.absoluteString)")
         self.fetchData(from: url) { (result) in
             switch result {
             case .success(let data):
-                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else { fatalError() }
+                AppearLogger().debugPrint("Successfully fetched augmented media with name \(media.name)")
+                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
+                    AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for media")
+                }
                 let archiveUrl = self.store(data: data, fileName: media.name, fileType: fileType)
                 completion(Result.success(archiveUrl))
             case .failure(let error):
@@ -70,14 +83,12 @@ extension AppearManager: AppearManagerProtocol {
     // MARK: Private functions
     
     private func fetchData(from url: URL, completion: @escaping (Result<Data>) -> Void) {
-        
         let session = URLSession(configuration: .default)
         let downloadTask = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(Result.failure(error))
             } else {
                 if let res = response as? HTTPURLResponse {
-                    print("Fetched data with response code \(res.statusCode)")
                     if let data = data {
                         completion(Result.success(data))
                     } else {
@@ -95,7 +106,6 @@ extension AppearManager: AppearManagerProtocol {
     private func store(data: Data, fileName: String, fileType: SupportedFileType) -> URL {
         let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
         let targetURL = tempDirectoryURL.appendingPathComponent("\(fileName).\(fileType)")
-        print(targetURL)
         do {
             try data.write(to: targetURL)
         } catch let error {
@@ -104,5 +114,4 @@ extension AppearManager: AppearManagerProtocol {
         }
         return targetURL
     }
-    
 }

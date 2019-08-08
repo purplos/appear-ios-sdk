@@ -7,14 +7,17 @@
 
 import Foundation
 import SceneKit
+import ARKit
 
+@available(iOS 12.0, *)
 public class AppearModelNode: SCNNode {
-    public init(archiveURL: URL, modelMedia: AppearProjectItem.ModelMedia) {
+    public init(archiveURL: URL, modelMedia: AppearProjectItem.ModelMedia, node: SCNNode? = nil, anchor: ARAnchor? = nil) {
         super.init()
         do {
             let scene = try SCNScene.init(url: archiveURL, options: nil)
-            let modelNode = scene.rootNode
-            self.addChildNode(modelNode.clone())
+            let modelNode = scene.rootNode.clone()
+            self.addChildNode(modelNode)
+            
             // set name
             self.name = modelMedia.name
             
@@ -31,8 +34,27 @@ public class AppearModelNode: SCNNode {
             ambientLightNode.light!.type = .ambient
             ambientLightNode.light!.color = UIColor.darkGray
             //modelNode.addChildNode(ambientLightNode)
+            
+            if let objectAnchor = anchor as? ARObjectAnchor {
+                // Set position of model relative to the object
+                self.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(modelMedia.position?[0] ?? 0.0),
+                                           objectAnchor.referenceObject.center.y + Float(modelMedia.position?[1] ?? 0.0),
+                                           objectAnchor.referenceObject.center.z + Float(modelMedia.position?[2] ?? 0.0))
+                
+            } else if anchor is ARImageAnchor {
+                // Set position of model relative to the plane
+                guard let node = node else {
+                    self.position = SCNVector3(0, 0, 0)
+                    return
+                }
+                self.position = SCNVector3(node.position.x + Float(modelMedia.position?[0] ?? 0.0),
+                                           node.position.y + Float(modelMedia.position?[1] ?? 0.0),
+                                           node.position.z + Float(modelMedia.position?[2] ?? 0.0))
+            }
+            
         } catch (let error) {
-            fatalError(error.localizedDescription)
+            AppearLogger().errorPrint(error.localizedDescription)
+            AppearLogger().fatalErrorPrint(AppearError.unableToCreateModelFromURL.errorMessage)
         }
     }
     

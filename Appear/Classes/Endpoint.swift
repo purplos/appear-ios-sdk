@@ -30,7 +30,7 @@ extension Endpoint {
         guard let componentURL = urlComponents.url else {
             fatalError("invalid URL")
         }
-        print(componentURL)
+        
         var request             = URLRequest(url: componentURL)
         request.httpBody        = body
         request.httpMethod      = httpMethod.rawValue
@@ -40,7 +40,6 @@ extension Endpoint {
         }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print(request.allHTTPHeaderFields ?? "Could not print the HTTP header fields of the receiver")
         return request
     }
 }

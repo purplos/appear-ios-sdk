@@ -134,7 +134,7 @@ extension AppearProjectItem {
         } else if let object = try? container.decode(ObjectMedia.self, forKey: .trigger) {
             self.trigger = object
         } else {
-            fatalError()
+            AppearLogger().fatalErrorPrint(AppearError.unableToDecode(.trigger))
         }
         
         var mediaDict = [MediaProtocol]()
@@ -146,7 +146,7 @@ extension AppearProjectItem {
             } else if let model = try? mediaContainer.decodeIfPresent(ModelMedia.self) {
                 mediaDict.append(model)
             } else {
-                fatalError()
+                AppearLogger().fatalErrorPrint(AppearError.unableToDecode(.media))
             }
         }
         

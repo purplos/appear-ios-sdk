@@ -11,14 +11,16 @@ import ARKit
 import Appear
 
 class ViewController: UIViewController {
+    
+    let triggerVC = TriggerARViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //present(TriggerARViewController(), animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let triggerVC = TriggerARViewController()
-        present(triggerVC, animated: true, completion: nil)
+       present(triggerVC, animated: true, completion: nil)
     }
 
 }

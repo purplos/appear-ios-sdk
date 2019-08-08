@@ -31,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		299E14EAA919657BF8EE0C6C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		4B09CE8822E3A143005DDD55 /* AppearInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AppearInfo.plist; sourceTree = "<group>"; };
+		4B09CE8822E3A143005DDD55 /* AppearInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppearInfo.plist; sourceTree = "<group>"; };
 		4B0A0628227B9D8E00801A09 /* Appear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Appear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE91F973A35A6A604911C15 /* Pods-Appear_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Appear_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Appear_Example/Pods-Appear_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5D0763B78126158A21DC7FAE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };

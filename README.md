@@ -15,9 +15,10 @@ Before you begin, you need a few things set up in your environment:
 
 ### Add the SDK
 
-Go to the [Appear Console](https://appear.media) and create a project, then enter a Project name.
-Enter the bundle identifier from your XCode Project and upload triggers and assosiated Augmented Reality Media files.
-Download the plist file and drag it into your XCode Project
+Sign in to the [Appear Console](https://appear.media) and create a project.
+Upload triggers and add assosiated Augmented Reality Media files.
+Go to the Integrations tab and create an iOS client. Remember to enter the bundle identifier from your Xcode Project.
+Download the plist file and drag it into your Xcode Project.
 
 ### Add The Appear Framwork to your project
 
@@ -36,10 +37,14 @@ Import the Appear module in your UIApplicationDelegate:
 import Appear
 ```
 
-Configure a AppearApp shared instance, typically in your application's application:didFinishLaunchingWithOptions: method:
+Configure a AppearApp shared instance, typically in your application's application:didFinishLaunchingWithOptions: method. Optionally add options like enabling debugging:
 
 ```swift
+// without options
 AppearApp.configure()
+
+// with options
+AppearApp.configure([.enableDebugging]) 
 ```
 
 Remember to add a NSCameraUsageDescription to your project if you havent already done so. Add the following code into your info.plist file

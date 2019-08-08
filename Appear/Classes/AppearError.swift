@@ -17,9 +17,14 @@ enum AppearError: Error {
     case missingConfiguration
     case localModelUrlMissing
     case unableToCreateModelFromURL
-    case unzipFromURLFailed
+    case unableToDecode(DecodeAttempt)
     case errorWithMessage(String)
     case networkingError(HTTPResponseError)
+}
+
+enum DecodeAttempt {
+    case trigger
+    case media
 }
 
 extension AppearError: LocalizedError {
@@ -44,8 +49,13 @@ extension AppearError: LocalizedError {
             return "Missing local model URL"
         case .unableToCreateModelFromURL:
             return "Unable to create model from URL"
-        case .unzipFromURLFailed:
-            return "Unable to unzip data from url"
+        case .unableToDecode(let attempt):
+            switch attempt {
+            case .trigger:
+                return "Unable to decode trigger"
+            case .media:
+                return "Unable to decode media"
+            }
         case .errorWithMessage(let message):
             return message
         case .networkingError(let responseError):
@@ -58,12 +68,12 @@ extension AppearError: LocalizedError {
         case .invalidBundle:
             return "Check that the Bundle Identifier in the ARCampaignInfo.plist is the same as for the project"
         case .missingPlist:
-            return "Download the AppearInfo.plist file from Https://something.no, and add it to the project"
+            return "Download AppearInfo.plist from https://appear.media, and add it to the project"
         case .missingConfiguration:
             return "Call AppearApp.configure() in the didFinishLaunchingWithOptions method in AppDelegate"
         case .networkingError(let responseError):
             return responseError.recoverySuggestion
-        case .missingBundle, .missingBaseUrl, .missingAPIKey, .missingCampaignId, .localModelUrlMissing, .unableToCreateModelFromURL, .unzipFromURLFailed, .errorWithMessage(_):
+        case .missingBundle, .missingBaseUrl, .missingAPIKey, .missingCampaignId, .localModelUrlMissing, .unableToCreateModelFromURL, .unableToDecode(_), .errorWithMessage(_):
             return ""
         }
     }

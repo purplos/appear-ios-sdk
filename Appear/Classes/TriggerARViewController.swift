@@ -41,11 +41,10 @@ public class TriggerARViewController: UIViewController {
     
     var models: [SCNNode] = []
     var videos: [VideoObject] = []
-    private var modelUrl: URL?
-    let viewModel: SimpleARViewModel = SimpleARViewModel()
+    var viewModel: SimpleARViewModel!
     private var customReferenceSet = Set<ARReferenceImage>()
     private var customOjectReferenceSet = Set<ARReferenceObject>()
-    var initialAppear = true
+    private var initialAppear = true
     
     
     /// View Life Cycle
@@ -53,6 +52,7 @@ public class TriggerARViewController: UIViewController {
         super.viewDidLoad()
         sceneView.delegate = self
         sceneView.session.delegate = self
+        viewModel = SimpleARViewModel()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         
@@ -87,15 +87,12 @@ public class TriggerARViewController: UIViewController {
         viewModel.fetchProject { (result) in
             switch result {
             case .success(let project):
-                print("successfully fetched project with id: \(String(describing: project.id))")
                 for item in project.items {
                     // Handle triggers
                     group.enter()
-                    print("fetching trigger object archive url from item with name: \(item.name)")
                     self.viewModel.fetchTriggerArchiveUrl(from: item, completion: { (result) in
                         switch result {
                         case .success(let url):
-                            print("Successfully fetched object archive url")
                             switch item.trigger.type {
                             case .image:
                                 do {
