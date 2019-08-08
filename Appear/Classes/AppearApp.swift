@@ -9,7 +9,7 @@ import Foundation
 
 public class AppearApp {
     
-    static let sharedInstance = AppearApp()
+    public static let sharedInstance = AppearApp()
     private init() { }
     
     static let baseURLKey: String = "BaseURL"

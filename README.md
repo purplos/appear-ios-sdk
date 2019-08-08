@@ -2,6 +2,9 @@
 
 Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. More information about Appear can be found at [https://appear.media](https://appear.media)
 
+## Quick Overview
+[![Object Detection Gif](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)
+
 ## Install the SDK
 
 ### Prerequisites
@@ -37,7 +40,7 @@ Import the Appear module in your UIApplicationDelegate:
 import Appear
 ```
 
-Configure a AppearApp shared instance, typically in your application's application:didFinishLaunchingWithOptions: method. Optionally add options like enabling debugging:
+Configure AppearApp, typically in your application's application:didFinishLaunchingWithOptions: method. Optionally add options like enabling debugging:
 
 ```swift
 // without options
