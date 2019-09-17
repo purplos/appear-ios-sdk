@@ -1,4 +1,4 @@
-![Header](https://raw.githubusercontent.com/purplos/appear-ios-sdk/master/Skjermbilde%202019-08-08%20kl.%2014.54.47.png)
+![Header](https://raw.githubusercontent.com/purplos/appear-ios-sdk/master/Skjermbilde%202019-09-17%20kl.%2009.58.59.png)
 # Appear iOS SDK
 
 Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. This framework allows you to upload Augmented Reality assets to a database and access them in your app whenever they are needed.
@@ -73,7 +73,7 @@ Initilize an instance of the TriggerARViewController  and present it. And thats 
 
 ```swift
 let triggerVC = TriggerARViewController()
-present(simpleVC, animated: true, completion: nil)
+present(triggerVC, animated: true, completion: nil)
 ```
 
 You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the TriggerARViewController before you present it.

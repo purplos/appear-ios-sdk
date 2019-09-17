@@ -25,6 +25,11 @@ public class AppearVideoNode: SCNNode {
         self.name = media.name
         //planeNode.eulerAngles.x = -.pi / 2
         
+        
+        let constraint = SCNBillboardConstraint()
+        constraint.freeAxes = [.X, .Y]
+        self.constraints = [constraint]
+        
         let avPlayerItem = AVPlayerItem(url: videoArchiveURL)
         self.avPlayer = AVPlayer(playerItem: avPlayerItem)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {

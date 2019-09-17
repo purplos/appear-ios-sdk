@@ -122,8 +122,13 @@ extension TriggerARViewController: ARSCNViewDelegate {
                                              completion: { (result) in
                                                 switch result {
                                                 case .success(let modelNode):
-                                                    animatableNodes.append((media: modelMedia, node: modelNode))
-                                                    group.leave()
+                                                    DispatchQueue.main.async {
+                                                        print("appending modelNode: \(modelNode.name)")
+                                                        animatableNodes.append((media: modelMedia, node: modelNode))
+                                                        print("count: \(animatableNodes.count)")
+                                                        group.leave()
+                                                        print("leaving: \(modelNode.name)")
+                                                    }
                                                 case .failure(let error):
                                                     fatalError(error.localizedDescription)
                                                 }
@@ -138,8 +143,13 @@ extension TriggerARViewController: ARSCNViewDelegate {
                                              completion: { (result) in
                                                 switch result {
                                                 case .success(let videoNode):
-                                                    animatableNodes.append((media: videoMedia, node: videoNode))
-                                                    group.leave()
+                                                    DispatchQueue.main.async {
+                                                        print("appending videoNode: \(videoNode.name)")
+                                                        animatableNodes.append((media: videoMedia, node: videoNode))
+                                                        print("count: \(animatableNodes.count)")
+                                                        group.leave()
+                                                        print("leaving: \(videoNode.name)")
+                                                    }
                                                 case .failure(let error):
                                                     fatalError(error.localizedDescription)
                                                 }
@@ -149,6 +159,7 @@ extension TriggerARViewController: ARSCNViewDelegate {
                     
                     group.notify(queue: DispatchQueue.main) {
                         // animate nodes. Use delay on media to time the animations
+                        print(animatableNodes)
                         self.stopPlaneLoading(node: node, completion: {
                             for animatableNode in animatableNodes {
                                 switch animatableNode.media.type {
@@ -239,6 +250,9 @@ extension TriggerARViewController: ARSCNViewDelegate {
         DispatchQueue.global(qos: .background).async {
             var modelNode = AppearModelNode(archiveURL: url, modelMedia: media, node: node, anchor: anchor)
             modelNode.scale = SCNVector3(0, 0, 0) // scale to 0 so we can make it pop in
+            if anchor is ARImageAnchor {
+                modelNode.eulerAngles.x = .pi / 2
+            }
             completion(Result.success(modelNode))
         }
     }

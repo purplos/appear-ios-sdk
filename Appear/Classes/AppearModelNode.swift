@@ -21,6 +21,10 @@ public class AppearModelNode: SCNNode {
             // set name
             self.name = modelMedia.name
             
+            let constraint = SCNBillboardConstraint()
+            constraint.freeAxes = [.X, .Y]
+            self.constraints?.append(constraint)
+            
             // create and add a light to the scene
             let lightNode = SCNNode()
             lightNode.light = SCNLight()
