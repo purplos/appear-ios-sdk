@@ -25,6 +25,8 @@
 		4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
 		4B74B3D522FC3FE6007A9406 /* AppearDebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */; };
 		4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */; };
+		4B92F931239323DE000F1B11 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B92F930239323DE000F1B11 /* Cache.swift */; };
+		4B92F93323932411000F1B11 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B92F93223932411000F1B11 /* DiskCache.swift */; };
 		4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9722F44989008A01D2 /* AppearManager.swift */; };
 		4B9C8A9E22F44989008A01D2 /* AppearModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */; };
 		4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */; };
@@ -78,6 +80,8 @@
 		4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleTutorialView.swift; path = Appear/Classes/SimpleTutorialView.swift; sourceTree = "<group>"; };
 		4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugOptions.swift; path = Appear/Classes/AppearDebugOptions.swift; sourceTree = "<group>"; };
 		4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugger.swift; path = Appear/Classes/AppearDebugger.swift; sourceTree = "<group>"; };
+		4B92F930239323DE000F1B11 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		4B92F93223932411000F1B11 /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		4B9C8A9722F44989008A01D2 /* AppearManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearManager.swift; path = Appear/Classes/AppearManager.swift; sourceTree = "<group>"; };
 		4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearModelNode.swift; path = Appear/Classes/AppearModelNode.swift; sourceTree = "<group>"; };
 		4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearVideoNode.swift; path = Appear/Classes/AppearVideoNode.swift; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */,
 				4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */,
 				4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */,
+				4B92F930239323DE000F1B11 /* Cache.swift */,
+				4B92F93223932411000F1B11 /* DiskCache.swift */,
 				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
 				E2ACDAF3D6A0025C02D7E9E1444CE7AC /* Support Files */,
 			);
@@ -453,6 +459,7 @@
 				4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */,
 				4B60E56D227C742500E4E455 /* AppearError.swift in Sources */,
 				4BDA62A222F4492800A4E99A /* LoaderPlaneNode.swift in Sources */,
+				4B92F93323932411000F1B11 /* DiskCache.swift in Sources */,
 				4B60E56E227C742500E4E455 /* WebService.swift in Sources */,
 				4B9C8AA022F44989008A01D2 /* LoaderObjectNode.swift in Sources */,
 				4B60E570227C742500E4E455 /* SCNMaterial+Extension.swift in Sources */,
@@ -467,6 +474,7 @@
 				4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */,
 				4B60E580227C746300E4E455 /* TriggerARViewController.swift in Sources */,
 				4BDA62A022F446FE00A4E99A /* AppearProject.swift in Sources */,
+				4B92F931239323DE000F1B11 /* Cache.swift in Sources */,
 				4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */,
 				4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */,
 				4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */,
