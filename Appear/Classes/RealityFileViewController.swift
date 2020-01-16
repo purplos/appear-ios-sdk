@@ -7,9 +7,10 @@
 
 import UIKit
 import RealityKit
+import Combine
 
 @available(iOS 13.0, *)
-class RealityFileViewController: UIViewController {
+public class RealityFileViewController: UIViewController {
 
     lazy var arView: ARView = {
         let view = ARView(frame: CGRect.zero)
@@ -23,7 +24,10 @@ class RealityFileViewController: UIViewController {
         return view
     }()
     
-    override func viewDidLoad() {
+    let realityViewModel = RealityFileViewModel()
+    var cancellable: AnyCancellable?
+    
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         
@@ -32,15 +36,30 @@ class RealityFileViewController: UIViewController {
         // Add the box anchor to the scene
         arView.scene.anchors.append(anchor)
         
-        let name = "AdobeAero2"
-        let url = Bundle.main.url(forResource: name, withExtension: "reality")
-        do {
-            let entity = try Entity.load(contentsOf: url!)
-            //self.installGestures(.all, for: greenBox)
-            anchor.addChild(entity)
-        } catch(let error) {
-            print(error.localizedDescription)
+        realityViewModel.fetchProject { (result) in
+            switch result {
+            case .success(let project):
+                guard let media = project.media.first else {
+                    AppearLogger().fatalErrorPrint("No media")
+                }
+                self.realityViewModel.fetchRealityFileUrl(from: media) { [weak self] (result) in
+                    switch result {
+                    case .success(let url):
+                        print("successful fetch")
+                        self?.addEntityToAnchor(url: url)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
         }
+    }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     func setupViews() {
@@ -58,6 +77,23 @@ class RealityFileViewController: UIViewController {
             tutorialView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             tutorialView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
+    }
+        
+    func addEntityToAnchor(url: URL?) {
+        print("adding entity")
+        print(url)
+        DispatchQueue.main.async {
+            self.cancellable = Entity.loadAnchorAsync(contentsOf: url!)
+            .sink(receiveCompletion: { loadCompletion in
+                print("---------- error")
+                self.cancellable?.cancel()
+            }, receiveValue: { (entity) in
+                print("---------- loaded")
+                self.arView.scene.addAnchor(entity)
+                self.cancellable?.cancel()
+                self.hideTutorialView()
+            })
+        }
     }
     
     private func hideTutorialView() {
