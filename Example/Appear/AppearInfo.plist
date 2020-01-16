@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>BaseURL</key>
-	<string>https://api.appear.media</string>
+	<string>https://appear-nest.herokuapp.com/</string>
 	<key>ProjectID</key>
-	<string>1BEEF5BC-FB7F-40B3-89C6-17C73283DE13</string>
+	<string>example-pxbh-b5i</string>
 	<key>BundleID</key>
 	<string>no.purpl.Appear-Example</string>
 	<key>APIKey</key>
-	<string>97zLk8TEsFn!HY1uMWBP25qEPWCDPQf!</string>
+	<string>fd773bbf-a2e0-4fb5-b5e2-f6c314ff769f</string>
 </dict>
 </plist>

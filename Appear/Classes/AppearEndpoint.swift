@@ -29,7 +29,7 @@ public enum AppearEndpoint: Endpoint{
     var request: URLRequest{
         let path: String
         switch self{
-        case .getProject: path = "/v1/project/\(AppearApp.projectId!)"
+        case .getProject: path = "projects/\(AppearApp.projectId!)/content"
         case .getNearbyProjects: path = "v1/c"
         }
         

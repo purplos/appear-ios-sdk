@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import ARKit
 import Appear
 
+@available(iOS 13.0, *)
 class ViewController: UIViewController {
-    
-    let triggerVC = TriggerARViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       present(triggerVC, animated: true, completion: nil)
+       present(RealityFileViewController(), animated: true, completion: nil)
     }
 
 }

@@ -15,4 +15,5 @@ public enum SupportedFileType: String {
     case usdz
     case arobject
     case mov
+    case reality
 }
