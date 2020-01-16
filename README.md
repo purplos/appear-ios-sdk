@@ -10,6 +10,7 @@ Appear is an app development platform with tools to help you build apps with dyn
 ✅ Object Detection <br/>
 ✅ Display usdz models <br/>
 ✅ Display .mov and mp4 videos
+✅ .Reality support <br/>
 
 ## Install the SDK
 
@@ -24,7 +25,7 @@ Before you begin, you need a few things set up in your environment:
 
 ### Add the SDK
 
-Sign in to the [Appear Console](https://appear.media) and create a project.
+Sign in to the [Appear Console](https://appear-console.herokuapp.com/) and create a project.
 Upload triggers and add assosiated Augmented Reality Media files.
 Go to the Integrations tab and create an iOS client. Remember to enter the bundle identifier from your Xcode Project.
 Download the plist file and drag it into your Xcode Project.
@@ -63,7 +64,19 @@ Remember to add a NSCameraUsageDescription to your project if you havent already
 <string>{YOUR APP NAME} requires access to your phone’s camera.</string>
 ```
 
+Download the Appear-info.plist file from the appear console website and drag it into your project
+
 ## Usage
+
+### Usage for Reality Projects
+With the Appear Framework added to your project you can easly create a RealityFileViewController. Place this in a button click funcion or in your viewDidAppear to navigate to the camera view.
+
+```swift
+let vc = RealityFileViewController()
+present(vc, animated: true, completion: nil)
+```
+
+### Usage for Trigger Projects
 
 With the Appear Framework added to your project you can easly create a TriggerARViewController or use your own fully customizable UIViewController. 
 
