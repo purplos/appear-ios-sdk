@@ -35,8 +35,8 @@
 		4B9C8AA022F44989008A01D2 /* LoaderObjectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9A22F44989008A01D2 /* LoaderObjectNode.swift */; };
 		4B9C8AA122F44989008A01D2 /* SupportedFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */; };
 		4B9C8AA222F44989008A01D2 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9C22F44989008A01D2 /* mock.json */; };
-		4BD9205F23CF853C000079F0 /* RealityProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9205E23CF853C000079F0 /* RealityProject.swift */; };
-		4BD9206123CF906A000079F0 /* RealityFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206023CF906A000079F0 /* RealityFileViewModel.swift */; };
+		4BD9206C23D05FD8000079F0 /* RealityProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206B23D05FD8000079F0 /* RealityProject.swift */; };
+		4BD9206E23D05FEF000079F0 /* RealityFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */; };
 		4BDA62A022F446FE00A4E99A /* AppearProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA629F22F446FE00A4E99A /* AppearProject.swift */; };
 		4BDA62A222F4492800A4E99A /* LoaderPlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA62A122F4492800A4E99A /* LoaderPlaneNode.swift */; };
 		4BDA62A422F4493800A4E99A /* FeatureNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA62A322F4493800A4E99A /* FeatureNode.swift */; };
@@ -93,8 +93,8 @@
 		4B9C8A9A22F44989008A01D2 /* LoaderObjectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderObjectNode.swift; path = Appear/Classes/LoaderObjectNode.swift; sourceTree = "<group>"; };
 		4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportedFileType.swift; path = Appear/Classes/SupportedFileType.swift; sourceTree = "<group>"; };
 		4B9C8A9C22F44989008A01D2 /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mock.json; path = Appear/Classes/mock.json; sourceTree = "<group>"; };
-		4BD9205E23CF853C000079F0 /* RealityProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityProject.swift; sourceTree = "<group>"; };
-		4BD9206023CF906A000079F0 /* RealityFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityFileViewModel.swift; sourceTree = "<group>"; };
+		4BD9206B23D05FD8000079F0 /* RealityProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProject.swift; path = Appear/Classes/RealityProject.swift; sourceTree = "<group>"; };
+		4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityFileViewModel.swift; path = Appear/Classes/RealityFileViewModel.swift; sourceTree = "<group>"; };
 		4BDA629F22F446FE00A4E99A /* AppearProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearProject.swift; path = Appear/Classes/AppearProject.swift; sourceTree = "<group>"; };
 		4BDA62A122F4492800A4E99A /* LoaderPlaneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderPlaneNode.swift; path = Appear/Classes/LoaderPlaneNode.swift; sourceTree = "<group>"; };
 		4BDA62A322F4493800A4E99A /* FeatureNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeatureNode.swift; path = Appear/Classes/FeatureNode.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 			children = (
 				4B60E55D227C742300E4E455 /* AppearApp.swift */,
 				4BDA629F22F446FE00A4E99A /* AppearProject.swift */,
-				4BD9205E23CF853C000079F0 /* RealityProject.swift */,
+				4BD9206B23D05FD8000079F0 /* RealityProject.swift */,
 				4B9C8A9722F44989008A01D2 /* AppearManager.swift */,
 				4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */,
 				4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */,
@@ -206,8 +206,8 @@
 				4B503DEA23986DEB00FA2070 /* Cache.swift */,
 				4B503DEB23986DEB00FA2070 /* DiskCache.swift */,
 				4B503DEC23986DEB00FA2070 /* RealityFileViewController.swift */,
-				4BD9206023CF906A000079F0 /* RealityFileViewModel.swift */,
 				4B60E57B227C746300E4E455 /* TriggerARViewController.swift */,
+				4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */,
 				4B60E579227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift */,
 				4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */,
 				4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */,
@@ -479,7 +479,7 @@
 				4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */,
 				4B503DED23986DEB00FA2070 /* Cache.swift in Sources */,
 				4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */,
-				4BD9205F23CF853C000079F0 /* RealityProject.swift in Sources */,
+				4BD9206C23D05FD8000079F0 /* RealityProject.swift in Sources */,
 				4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */,
 				4B9C8AA122F44989008A01D2 /* SupportedFileType.swift in Sources */,
 				4B60E573227C742500E4E455 /* Endpoint.swift in Sources */,
@@ -491,7 +491,7 @@
 				4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */,
 				4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */,
 				4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */,
-				4BD9206123CF906A000079F0 /* RealityFileViewModel.swift in Sources */,
+				4BD9206E23D05FEF000079F0 /* RealityFileViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
