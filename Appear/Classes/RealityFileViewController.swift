@@ -31,11 +31,6 @@ public class RealityFileViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         
-        let anchor = AnchorEntity(plane: .horizontal)
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(anchor)
-        
         realityViewModel.fetchProject { (result) in
             switch result {
             case .success(let project):
