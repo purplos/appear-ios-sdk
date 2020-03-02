@@ -18,7 +18,26 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       present(RealityFileViewController(), animated: true, completion: nil)
+       let manager = AppearManager()
+        manager.fetchMedia(withID: "c7dc2f20-2330-4b59-b5c2-379d55a860a7") { (result) in
+            switch result {
+            case .success(let media):
+                manager.fetchRealityFileArchiveUrl(from: media) { (result) in
+                    switch result {
+                    case .success(let url):
+                        DispatchQueue.main.async {
+                            let vc = RealityFileViewController()
+                            vc.configure(withURLs: [url])
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
-
+    
 }

@@ -24,31 +24,75 @@ public class RealityFileViewController: UIViewController {
         return view
     }()
     
+    private var urls: [URL]?
+    
     let realityViewModel = RealityFileViewModel()
-    var cancellable: AnyCancellable?
+    private var subscribers = Set<AnyCancellable>()
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
-        realityViewModel.fetchProject { (result) in
-            switch result {
-            case .success(let project):
-                guard let media = project.media.first else {
-                    AppearLogger().fatalErrorPrint("No media")
-                }
-                self.realityViewModel.fetchRealityFileUrl(from: media) { [weak self] (result) in
-                    switch result {
-                    case .success(let url):
-                        print("successful fetch")
-                        self?.addEntityToAnchor(url: url)
-                    case .failure(let error):
-                        print(error.localizedDescription)
+        if let urls = urls {
+            self.loadAnchors(from: urls)
+        } else {
+            realityViewModel.fetchProject { (result) in
+                switch result {
+                case .success(let project):
+                    self.fetchAllActiveMediaURLs(media: project.media) { (result) in
+                        switch result {
+                        case .success(let urls):
+                            self.loadAnchors(from: urls)
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        }
                     }
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
                 }
-            case .failure(let error):
-                fatalError(error.localizedDescription)
             }
+        }
+    }
+    
+    public func configure(withURLs urls: [URL]) {
+        self.urls = urls
+    }
+    
+    private func loadAnchors(from urls: [URL]) {
+        let group = DispatchGroup()
+        for url in urls {
+            group.enter()
+            self.addEntityToAnchor(url: url) {
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            for sub in self.subscribers {
+                sub.cancel()
+            }
+            self.hideTutorialView()
+        }
+        
+    }
+    
+    private func fetchAllActiveMediaURLs(media: [RealityMedia], completion: @escaping (Result<[URL]>) -> Void) {
+        print(media.count)
+        let group = DispatchGroup()
+        var urls: [URL] = []
+        for m in media {
+            group.enter()
+            self.realityViewModel.fetchRealityFileUrl(from: m) { (result) in
+                switch result {
+                case .success(let url):
+                    urls.append(url)
+                    group.leave()
+                case .failure(let error):
+                    completion(.failure(error))
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: .main) {
+            completion(Result.success(urls))
         }
     }
     
@@ -74,21 +118,26 @@ public class RealityFileViewController: UIViewController {
             ])
     }
         
-    func addEntityToAnchor(url: URL?) {
-        print("adding entity")
-        print(url)
-        DispatchQueue.main.async {
-            self.cancellable = Entity.loadAnchorAsync(contentsOf: url!)
-            .sink(receiveCompletion: { loadCompletion in
-                print("---------- error")
-                self.cancellable?.cancel()
-            }, receiveValue: { (entity) in
-                print("---------- loaded")
-                self.arView.scene.addAnchor(entity)
-                self.cancellable?.cancel()
-                self.hideTutorialView()
-            })
-        }
+    private func addEntityToAnchor(url: URL?, completion: @escaping () -> Void) {
+        if let url = url {
+            DispatchQueue.main.async {
+                let loadRequest = Entity.loadAnchorAsync(contentsOf: url)
+                loadRequest.sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished:
+                        print("finished")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                    }, receiveValue: { anchor in
+                        print("receiveValue")
+                        self.arView.scene.addAnchor(anchor)
+                        completion()
+                    }).store(in: &self.subscribers)
+                }
+            } else {
+                fatalError("no url")
+            }
     }
     
     private func hideTutorialView() {

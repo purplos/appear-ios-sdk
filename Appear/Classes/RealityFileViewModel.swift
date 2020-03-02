@@ -9,7 +9,7 @@ import Foundation
 
 @available(iOS 13.0, *)
 class RealityFileViewModel {
-    let manager: AppearManagerProtocol = AppearManager()
+    let manager: RealityManager = RealityManagerImpl()
     
     func fetchProject(completion: @escaping (Result<RealityProject>) -> Void) {
         manager.fetchRealityProject { (result) in
@@ -18,7 +18,7 @@ class RealityFileViewModel {
     }
     
     func fetchRealityFileUrl(from media: RealityMedia, completion: @escaping (Result<URL>) -> Void) {
-        manager.fetchRealityFileArchiveUrl(from: media) { (result) in
+        manager.fetchArchiveUrl(from: media) { (result) in
             completion(result)
         }
     }

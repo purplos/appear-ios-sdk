@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B0A0629227B9D8E00801A09 /* Appear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A0628227B9D8E00801A09 /* Appear.framework */; };
-		4B503DF1239871AA00FA2070 /* AdobeAero2.reality in Resources */ = {isa = PBXBuildFile; fileRef = 4B503DF0239871A600FA2070 /* AdobeAero2.reality */; };
-		4BD9206723CF9ACD000079F0 /* AppearInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BD9206623CF9ACD000079F0 /* AppearInfo.plist */; };
+		4B20D79723D8A73E00493DDC /* AppearInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B20D79623D8A73E00493DDC /* AppearInfo.plist */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -33,8 +32,7 @@
 /* Begin PBXFileReference section */
 		299E14EAA919657BF8EE0C6C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4B0A0628227B9D8E00801A09 /* Appear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Appear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B503DF0239871A600FA2070 /* AdobeAero2.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = AdobeAero2.reality; sourceTree = "<group>"; };
-		4BD9206623CF9ACD000079F0 /* AppearInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AppearInfo.plist; sourceTree = "<group>"; };
+		4B20D79623D8A73E00493DDC /* AppearInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AppearInfo.plist; sourceTree = "<group>"; };
 		4EE91F973A35A6A604911C15 /* Pods-Appear_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Appear_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Appear_Example/Pods-Appear_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5D0763B78126158A21DC7FAE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Appear_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appear_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,9 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				4B503DF0239871A600FA2070 /* AdobeAero2.reality */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				4BD9206623CF9ACD000079F0 /* AppearInfo.plist */,
+				4B20D79623D8A73E00493DDC /* AppearInfo.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -260,10 +257,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				4BD9206723CF9ACD000079F0 /* AppearInfo.plist in Resources */,
-				4B503DF1239871AA00FA2070 /* AdobeAero2.reality in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				4B20D79723D8A73E00493DDC /* AppearInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

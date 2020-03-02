@@ -30,6 +30,20 @@ public struct RealityProject: Decodable {
 }
 
 public struct RealityMedia: Decodable {
-    public let name = "reality"
+    public let id: String
+    public let name: String?
     public let url: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case url
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(String.self, forKey: .id)
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        url = try values.decode(String.self, forKey: .url)
+    }
 }

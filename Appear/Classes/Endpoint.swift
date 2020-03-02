@@ -36,7 +36,7 @@ extension Endpoint {
         request.httpMethod      = httpMethod.rawValue
         
         if let apiKey = AppearApp.apiKeyString {
-            request.addValue("\(apiKey)", forHTTPHeaderField: "Authorization")
+            request.addValue("\(apiKey)", forHTTPHeaderField: "api_key")
         }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

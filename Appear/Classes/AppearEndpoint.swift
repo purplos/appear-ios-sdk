@@ -10,7 +10,7 @@ import Foundation
 //MARK: - UserEndpoints
 public enum AppearEndpoint: Endpoint{
     case getProject
-    case getNearbyProjects(lat: Double, lon: Double)
+    case mediaWithID(String)
     
     var baseUrl: URL {
         return URL(string: AppearApp.databaseURLString)!
@@ -22,7 +22,7 @@ public enum AppearEndpoint: Endpoint{
     
     var httpMethod: HTTPMethod{
         switch self {
-        case .getProject, .getNearbyProjects: return .get
+        case .getProject, .mediaWithID: return .get
         }
     }
     
@@ -30,7 +30,7 @@ public enum AppearEndpoint: Endpoint{
         let path: String
         switch self{
         case .getProject: path = "projects/\(AppearApp.projectId!)/content"
-        case .getNearbyProjects: path = "v1/c"
+        case .mediaWithID(let id): path = "projects/\(AppearApp.projectId!)/content/\(id)"
         }
         
         return try! requestforEndpoint(path)
@@ -38,14 +38,7 @@ public enum AppearEndpoint: Endpoint{
     
     var body: Data? {
         switch self {
-        case .getProject: return nil
-        case .getNearbyProjects(let lat, let lon):
-            let data =  ["latitude": lat, "longitude": lon] as [String : Any]
-            do {
-                return try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-            } catch (let error){
-                fatalError(error.localizedDescription)
-            }
+        case .getProject, .mediaWithID: return nil
         }
     }
 }
