@@ -8,9 +8,12 @@
 
 import UIKit
 import Appear
+import RealityKit
 
 @available(iOS 13.0, *)
 class ViewController: UIViewController {
+    
+    private var manager: AppearManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,15 +21,23 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       let manager = AppearManager()
-        manager.fetchMedia(withID: "c7dc2f20-2330-4b59-b5c2-379d55a860a7") { (result) in
+        manager = AppearManager()
+        manager.delegate = self
+        manager.fetchMedia(withID: "96329fe1-8955-4ca1-930d-3e290bede6e7") { (result) in
             switch result {
             case .success(let media):
-                manager.fetchRealityFileArchiveUrl(from: media) { (result) in
+                self.manager.fetchRealityFileArchiveUrl(from: media) { (result) in
                     switch result {
                     case .success(let url):
                         DispatchQueue.main.async {
                             let vc = RealityFileViewController()
+//                            vc.onAction { (identifier, entity) in
+//                                if identifier == "testtrigger" {
+//                                    print("wohooo")
+//                                } else {
+//                                    print("buhuuuu")
+//                                }
+//                            }
                             vc.configure(withURLs: [url])
                             self.present(vc, animated: true, completion: nil)
                         }
@@ -40,4 +51,11 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+@available(iOS 13.0, *)
+extension ViewController: AppearManagerDelegate {
+    func didReceiveActionNotification(withIdentifier identifier: String, entity: Entity?) {
+        print(identifier)
+    }
 }

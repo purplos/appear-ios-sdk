@@ -8,6 +8,12 @@
 import Foundation
 import CoreLocation
 import ARKit
+import RealityKit
+
+public protocol AppearManagerDelegate {
+    @available(iOS 13.0, *)
+    func didReceiveActionNotification(withIdentifier identifier: String, entity: RealityKit.Entity?)
+}
 
 public protocol AppearManagerProtocol {
     func fetchRealityProject(completion: @escaping (Result<RealityProject>) -> Void)
@@ -21,8 +27,49 @@ public protocol AppearManagerProtocol {
 
 public class AppearManager {
     
+    public var delegate: AppearManagerDelegate? {
+        didSet {
+            if #available(iOS 13.0, *) {
+                setupActionListener()
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
+    
     public init() {
         guard AppearApp.isConfigured else { fatalError(AppearError.missingConfiguration.errorMessage)}
+    }
+    
+    @available(iOS 13.0, *)
+    private func setupActionListener() {
+        Foundation.NotificationCenter.default.addObserver(self, selector: #selector(actionDidFire(notification:)), name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
+    }
+    
+    @available(iOS 13.0, *)
+    @objc
+    private func actionDidFire(notification: Foundation.Notification) {
+
+        guard let userInfo = notification.userInfo as? [Swift.String: Any] else {
+            return
+        }
+
+        guard let identifier = userInfo["RealityKit.NotifyAction.Identifier"] as? Swift.String else {
+                return
+        }
+
+        let entity = userInfo["RealityKit.NotifyAction.Entity"] as? RealityKit.Entity
+
+        onAction(identifier, entity)
+    }
+    
+    @available(iOS 13.0, *)
+    private func onAction(_ identifier: String, _ entity: Entity?) {
+        delegate?.didReceiveActionNotification(withIdentifier: identifier, entity: entity)
+    }
+    
+    deinit {
+        Foundation.NotificationCenter.default.removeObserver(self, name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
     }
     
 }
@@ -151,7 +198,7 @@ extension AppearManager: AppearManagerProtocol {
             if let error = error {
                 completion(Result.failure(error))
             } else {
-                if let res = response as? HTTPURLResponse {
+                if response as? HTTPURLResponse != nil {
                     if let data = data {
                         completion(Result.success(data))
                     } else {

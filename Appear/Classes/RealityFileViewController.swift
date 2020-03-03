@@ -24,9 +24,13 @@ public class RealityFileViewController: UIViewController {
         return view
     }()
     
-    private var urls: [URL]?
+    public func onAction(handler: @escaping (_ identifier: String, _ entity: RealityKit.Entity?) -> Void) {
+        actionHandler = handler
+    }
     
-    let realityViewModel = RealityFileViewModel()
+    private var actionHandler: ((String, RealityKit.Entity?) -> Void)?
+    private var urls: [URL]?
+    private let realityViewModel = RealityFileViewModel()
     private var subscribers = Set<AnyCancellable>()
     
     override public func viewDidLoad() {
@@ -131,6 +135,7 @@ public class RealityFileViewController: UIViewController {
                     }
                     }, receiveValue: { anchor in
                         print("receiveValue")
+                        self.setupNotificationListener()
                         self.arView.scene.addAnchor(anchor)
                         completion()
                     }).store(in: &self.subscribers)
@@ -147,5 +152,37 @@ public class RealityFileViewController: UIViewController {
             self.tutorialView.isHidden = true
         })
     }
+    
+    private func setupNotificationListener() {
+        Foundation.NotificationCenter.default.addObserver(self, selector: #selector(actionDidFire(notification:)), name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
+    }
+    
+    @objc
+    private func actionDidFire(notification: Foundation.Notification) {
+
+        guard let userInfo = notification.userInfo as? [Swift.String: Any] else {
+            return
+        }
+
+        guard let identifier = userInfo["RealityKit.NotifyAction.Identifier"] as? Swift.String else {
+                return
+        }
+
+        let entity = userInfo["RealityKit.NotifyAction.Entity"] as? RealityKit.Entity
+
+        onAction(identifier, entity)
+    }
+    
+    private func onAction(_ identifier: String, _ entity: Entity?) {
+        guard let handler = actionHandler else {
+            return
+        }
+        handler(identifier, entity)
+    }
+    
+    deinit {
+        Foundation.NotificationCenter.default.removeObserver(self, name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
+    }
+
 
 }
