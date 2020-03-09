@@ -89,7 +89,7 @@ present(vc, animated: true, completion: nil)
 
 The RealityFileViewController will by default fetch all the active .reality files that have been uploaded. If you want to spesify which .reality file that should be used you can simply configure the RealityFileViewController with the identifier.
 
-```
+```swift
 // create an instance of the RealityFileViewController
 let vc = RealityFileViewController()
 // configure with the identifier of the .reality file that should be displayed 
@@ -98,7 +98,7 @@ vc.configure(withIdentifier: "")
 
 You can run code whenever an alert is being received from a behavior. For example you can run a network request when the user clicks on a 3D model, detects a plane/image/object, etc..
 
-```
+```swift
 let vc = RealityFileViewController()
 vc.onAction { (identifier, entity) in
     if identifier == "your_identifier" {
@@ -132,7 +132,7 @@ This project object contains an array of RealityMedia objects. These are the upl
 
 If you dont want to fetch the project but just want to load a reality file uploaded with a spesific identifier you can also do that.
 
-```
+```swift
 manager.fetchMedia(withID: "c7dc2f20-2330-4b59-b5c2-379d55a860a7") { (result) in
         switch result {
         case .success(let media):
@@ -160,7 +160,7 @@ manager.fetchRealityFileArchiveUrl(from: media) { (result) in
 
 In order to handle the recieved alerts from the reality file make sure the ViewController comforms to AppearManagerDelegate. This delegate has a function that can be implemented to handle incoming alerts.
 
-```
+```swift
 func didReceiveActionNotification(withIdentifier identifier: String, entity: RealityKit.Entity?)
 ```
 
