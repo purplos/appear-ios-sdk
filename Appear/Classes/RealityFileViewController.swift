@@ -29,15 +29,29 @@ public class RealityFileViewController: UIViewController {
     }
     
     private var actionHandler: ((String, RealityKit.Entity?) -> Void)?
-    private var urls: [URL]?
+    private var identifier: String?
     private let realityViewModel = RealityFileViewModel()
     private var subscribers = Set<AnyCancellable>()
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        if let urls = urls {
-            self.loadAnchors(from: urls)
+        if let id = identifier {
+            realityViewModel.fetchRealityMedia(withID: id) { (result) in
+                switch result {
+                case .success(let media):
+                    self.fetchAllActiveMediaURLs(media: [media]) { (result) in
+                        switch result {
+                        case .success(let urls):
+                            self.loadAnchors(from: urls)
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        }
+                    }
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                }
+            }
         } else {
             realityViewModel.fetchProject { (result) in
                 switch result {
@@ -57,8 +71,8 @@ public class RealityFileViewController: UIViewController {
         }
     }
     
-    public func configure(withURLs urls: [URL]) {
-        self.urls = urls
+    public func configure(withIdentifier identifier: String) {
+        self.identifier = identifier
     }
     
     private func loadAnchors(from urls: [URL]) {

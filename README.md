@@ -3,22 +3,15 @@
 
 Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. This framework allows you to upload Augmented Reality assets to a database and access them in your app whenever they are needed.
 
-## Quick Overview
-[![Object Detection Gif](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)](https://media.giphy.com/media/ZEO80GmrjTqrcRwei7/giphy.gif)
-
-✅ Image detection <br/>
-✅ Object Detection <br/>
-✅ Display usdz models <br/>
-✅ Display .mov and mp4 videos <br/>
-✅ .Reality support <br/>
+Read more about The Appear Framework on our [website](https://appear-landingpage.netlify.com/)
 
 ## Install the SDK
 
 ### Prerequisites
 
 Before you begin, you need a few things set up in your environment:
-* Xcode 10.2 or later
-* An Xcode project targeting iOS 12 or later
+* Xcode 11 or later
+* An Xcode project targeting iOS 13 or later
 * Swift projects must use Swift 5.0 or later
 * The bundle identifier of your app
 * CocoaPods 1.4.0 or later
@@ -26,8 +19,9 @@ Before you begin, you need a few things set up in your environment:
 ### Add the SDK
 
 Sign in to the [Appear Console](https://appear-console.herokuapp.com/) and create a project.
-Upload triggers and add assosiated Augmented Reality Media files.
-Go to the Integrations tab and create an iOS client. Remember to enter the bundle identifier from your Xcode Project.
+Create a project
+Create a client
+Upload .Reality files
 Download the plist file and drag it into your Xcode Project.
 
 ### Add The Appear Framwork to your project
@@ -68,46 +62,54 @@ Download the Appear-info.plist file from the appear console website and drag it 
 
 ## Usage
 
-### Usage for Reality Projects
-With the Appear Framework added to your project you can easly create a RealityFileViewController. Place this in a button click funcion or in your viewDidAppear to navigate to the camera view.
+### Quick and easy implementation of a Reality Projects
+
+With the Appear Framework added to your project you can easly create a RealityFileViewController. Place this in a button click function or in your viewDidAppear to navigate to the camera view.
 
 ```swift
 let vc = RealityFileViewController()
 present(vc, animated: true, completion: nil)
 ```
 
-### Usage for Trigger Projects
-
-With the Appear Framework added to your project you can easly create a TriggerARViewController or use your own fully customizable UIViewController. 
-
-### Quick and easy implementation
-
-Initilize an instance of the TriggerARViewController  and present it. And thats it!
-
-```swift
-let triggerVC = TriggerARViewController()
-present(triggerVC, animated: true, completion: nil)
-```
-
-You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the TriggerARViewController before you present it.
+You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the RealityFileViewController before you present it.
 
 ```swift
 // create an instance of your own subclass of UIView
 let customTutorialView = CustomTutorialView()
 
-// create an instance of the TriggerARViewController
-let triggerVC = TriggerARViewController()
+// create an instance of the RealityFileViewController
+let vc = RealityFileViewController()
 
 // replace the tutorialView
-triggerVC.tutorialView = customTutorialView
+vc.tutorialView = customTutorialView
 
 // present 
-present(triggerVC, animated: true, completion: nil)
+present(vc, animated: true, completion: nil)
 ```
 
-### Advanced implementation
+The RealityFileViewController will by default fetch all the active .reality files that have been uploaded. If you want to spesify which .reality file that should be used you can simply configure the RealityFileViewController with the identifier.
 
-Create an instance of AppearManager in your own ViewController and get access to all the project assets. 
+```
+// create an instance of the RealityFileViewController
+let vc = RealityFileViewController()
+// configure with the identifier of the .reality file that should be displayed 
+vc.configure(withIdentifier: "") 
+```
+
+You can run code whenever an alert is being received from a behavior. For example you can run a network request when the user clicks on a 3D model, detects a plane/image/object, etc..
+
+```
+let vc = RealityFileViewController()
+vc.onAction { (identifier, entity) in
+    if identifier == "your_identifier" {
+        // Do something
+    }
+}
+```
+
+### Advanced implementation of a Reality Projects
+
+Create an instance of AppearManager in your own ViewController and get access to all uploaded assets. 
 
 Fetching the project: 
 
@@ -116,7 +118,7 @@ Fetching the project:
 let manager = AppearManager()
 
 // fetch the project
-manager.fetchProject { (result) in
+manager.fetchRealityProject { (result) in
     switch result {
     case .success(let project):
         print(project)
@@ -126,46 +128,40 @@ manager.fetchProject { (result) in
 }
 ```
 
-After having fetched the project you can fetch the triggers and agumented media files using the AppearManager.
+This project object contains an array of RealityMedia objects. These are the uploaded reality files. 
 
-Fetching the triggers:
-```swift
-for item in project.items {
-    manager.fetchTriggerArchiveUrl(from: item, completion: { (result) in
+If you dont want to fetch the project but just want to load a reality file uploaded with a spesific identifier you can also do that.
+
+```
+manager.fetchMedia(withID: "c7dc2f20-2330-4b59-b5c2-379d55a860a7") { (result) in
         switch result {
-        case .success(let url):
-            switch item.trigger.type {
-            case .image:
-                // create a reference image with the URL and add it to a set of ARReferenceImage
-            case .object:
-                // create a reference object with the URL and add it to a set of ARReferenceObject
-            }
+        case .success(let media):
+            
         case .failure(let error):
-            fatalError(error.localizedDescription)
+            print(error.localizedDescription)
         }
-    })
+    }
 }
 ```
 
-Fetching the Augmented Media: 
+In order to place these reality files to a scene we currently need to store the reality file locally so it can be loaded through RealityKit.
+
 ```swift
-for media in item.media {
-    manager.fetchMediaArchiveUrl(from: media, completion: { (result) in
-        switch result {
-        case .success(let url):
-            switch media.type {
-            case .model:
-                let modelNode = AppearModelNode(archiveURL: url, modelMedia: media as! AppearProjectItem.ModelMedia)
-                // do something with the modelNode.
-            case .video:
-                let videoNode = AppearVideoNode(videoArchiveURL: url, media: media as! AppearProjectItem.VideoMedia)
-                // do something with the videoNode
-            }
-        case .failure(let error):
-            fatalError(error.localizedDescription)
-        }
-    })
+// fetching the reality file, storing it file with URL.
+manager.fetchRealityFileArchiveUrl(from: media) { (result) in
+    switch result {
+    case .success(let url):
+        // load Entity with URL
+    case .failure(let error):
+        // Handle error here
+    }
 }
+```
+
+In order to handle the recieved alerts from the reality file make sure the ViewController comforms to AppearManagerDelegate. This delegate has a function that can be implemented to handle incoming alerts.
+
+```
+func didReceiveActionNotification(withIdentifier identifier: String, entity: RealityKit.Entity?)
 ```
 
 ## Versioning
