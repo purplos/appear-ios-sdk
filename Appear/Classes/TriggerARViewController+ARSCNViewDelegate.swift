@@ -248,11 +248,8 @@ extension TriggerARViewController: ARSCNViewDelegate {
     private func createModel(from url: URL, with media: AppearProjectItem.ModelMedia, relativeTo node: SCNNode, for anchor: ARAnchor, completion: @escaping (Result<SCNNode>) -> Void) {
         // get a global concurrent queue
         DispatchQueue.global(qos: .background).async {
-            let modelNode = AppearModelNode(archiveURL: url, modelMedia: media, node: node, anchor: anchor)
+            var modelNode = AppearModelNode(archiveURL: url, modelMedia: media, node: node, anchor: anchor)
             modelNode.scale = SCNVector3(0, 0, 0) // scale to 0 so we can make it pop in
-            if anchor is ARImageAnchor {
-                modelNode.eulerAngles.x = .pi / 2
-            }
             completion(Result.success(modelNode))
         }
     }

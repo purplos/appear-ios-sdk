@@ -19,13 +19,11 @@ public protocol AppearManagerProtocol {
     func fetchRealityProject(completion: @escaping (Result<RealityProject>) -> Void)
     func fetchMedia(withID id: String, completion: @escaping (Result<RealityMedia>) -> Void)
     func fetchRealityFileArchiveUrl(from media: RealityMedia, completion: @escaping (Result<URL>) -> Void)
-    
-    func fetchProject(completion: @escaping (Result<AppearProject>) -> Void)
-    func fetchTriggerArchiveUrl(from item: AppearProjectItem, completion: @escaping (Result<URL>) -> Void)
-    func fetchMediaArchiveUrl(from media: MediaProtocol, completion: @escaping (Result<URL>) -> Void)
 }
 
 public class AppearManager {
+    
+    let cache: DiskCache = DiskCache()
     
     public var delegate: AppearManagerDelegate? {
         didSet {
@@ -118,74 +116,24 @@ extension AppearManager: AppearManagerProtocol {
     public func fetchRealityFileArchiveUrl(from media: RealityMedia, completion: @escaping (Result<URL>) -> Void) {
         guard let url = URL(string: media.url) else { fatalError() }
         AppearLogger().debugPrint("Fetching augmented media data with id \(media.id) from URL: \(url.absoluteString)")
-        self.fetchData(from: url) { (result) in
-            switch result {
-            case .success(let data):
-                AppearLogger().debugPrint("Successfully fetched augmented media with id \(media.id)")
-                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
-                    AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for media")
+        
+        if cache.has(Data.self, forKey: media.id) {
+            print("returning cached url")
+            completion(Result.success(cache.fileURL(forKey: media.id, fileType: .reality)))
+        } else {
+            self.fetchData(from: url) { (result) in
+                switch result {
+                case .success(let data):
+                    AppearLogger().debugPrint("Successfully fetched augmented media with id \(media.id)")
+                    guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
+                        AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for media")
+                    }
+                    self.store(data: data, fileName: media.id, fileType: fileType, completion: { result in
+                        completion(result)
+                    })
+                case .failure(let error):
+                    completion(Result.failure(error))
                 }
-                let archiveUrl = self.store(data: data, fileName: media.id, fileType: fileType)
-                completion(Result.success(archiveUrl))
-            case .failure(let error):
-                completion(Result.failure(error))
-            }
-        }
-    }
-    
-    //MARK:- Trigger project type
-    public func fetchProject(completion: @escaping (Result<AppearProject>) -> Void) {
-        AppearLogger().debugPrint("Fetching project...")
-        WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
-            switch result {
-            case .success(let data):
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
-                AppearLogger().debugPrint("Successfully fetched project data")
-                AppearLogger().debugPrint(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
-                guard let project = try? decoder.decode(AppearProject.self, from: data) else {
-                    AppearLogger().fatalErrorPrint("Unable to decode project data to AppearProject struct")
-                }
-                AppearLogger().debugPrint("Successfully decoded project data to AppearProject")
-                completion(Result.success(project))
-            case .failure(let error):
-                completion(Result.failure(AppearError.errorWithMessage(error.localizedDescription)))
-            }
-        }
-    }
-    
-    public func fetchTriggerArchiveUrl(from item: AppearProjectItem, completion: @escaping (Result<URL>) -> Void) {
-        guard let url = URL(string: item.trigger.url) else { fatalError() }
-        AppearLogger().debugPrint("Fetching trigger data with name \(item.name) from URL: \(url.absoluteString)")
-        self.fetchData(from: url) { (result) in
-            switch result {
-            case .success(let data):
-                AppearLogger().debugPrint("Successfully fetched trigger with name \(item.name)")
-                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
-                     AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for trigger")
-                }
-                let archiveUrl = self.store(data: data, fileName: item.name, fileType: fileType)
-                completion(Result.success(archiveUrl))
-            case .failure(let error):
-                completion(Result.failure(error))
-            }
-        }
-    }
-    
-    public func fetchMediaArchiveUrl(from media: MediaProtocol, completion: @escaping (Result<URL>) -> Void) {
-        guard let url = URL(string: media.url) else { fatalError() }
-        AppearLogger().debugPrint("Fetching augmented media data with name \(media.name) from URL: \(url.absoluteString)")
-        self.fetchData(from: url) { (result) in
-            switch result {
-            case .success(let data):
-                AppearLogger().debugPrint("Successfully fetched augmented media with name \(media.name)")
-                guard let fileType = SupportedFileType.init(rawValue: url.pathExtension.lowercased()) else {
-                    AppearLogger().fatalErrorPrint("\(url.pathExtension.lowercased()) is not a supported file type for media")
-                }
-                let archiveUrl = self.store(data: data, fileName: media.name, fileType: fileType)
-                completion(Result.success(archiveUrl))
-            case .failure(let error):
-                completion(Result.failure(error))
             }
         }
     }
@@ -213,15 +161,22 @@ extension AppearManager: AppearManagerProtocol {
         downloadTask.resume()
     }
     
-    private func store(data: Data, fileName: String, fileType: SupportedFileType) -> URL {
-        let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
-        let targetURL = tempDirectoryURL.appendingPathComponent("\(fileName).\(fileType)")
+    private func store(data: Data, fileName: String, fileType: SupportedFileType, completion: @escaping (Result<URL>) -> Void) {
         do {
-            try data.write(to: targetURL)
-        } catch let error {
-            NSLog("Unable to copy file: \(error)")
-            fatalError()
+            let url = try cache.put(data, withKey: fileName, fileType: fileType, expires: .in(.minutes(15)))
+            completion(Result.success(url))
+        } catch (let error) {
+            completion(Result.failure(error))
         }
-        return targetURL
+        
+//        let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+//        let targetURL = tempDirectoryURL.appendingPathComponent("\(fileName).\(fileType)")
+//        do {
+//            try data.write(to: targetURL)
+//        } catch let error {
+//            NSLog("Unable to copy file: \(error)")
+//            fatalError()
+//        }
+//        return targetURL
     }
 }

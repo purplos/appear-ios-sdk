@@ -26,6 +26,10 @@ public class AppearVideoNode: SCNNode {
         //planeNode.eulerAngles.x = -.pi / 2
         
         
+        let constraint = SCNBillboardConstraint()
+        constraint.freeAxes = [.X, .Y]
+        self.constraints = [constraint]
+        
         let avPlayerItem = AVPlayerItem(url: videoArchiveURL)
         self.avPlayer = AVPlayer(playerItem: avPlayerItem)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -49,11 +53,6 @@ public class AppearVideoNode: SCNNode {
         
         //MARK: - Position
         if let objectAnchor = anchor as? ARObjectAnchor {
-            
-            let constraint = SCNBillboardConstraint()
-            constraint.freeAxes = [.X, .Y]
-            self.constraints = [constraint]
-            
             self.position = SCNVector3(objectAnchor.referenceObject.center.x + Float(media.position?[0] ?? 0.0),
                                             objectAnchor.referenceObject.center.y + Float(media.position?[1] ?? 0.0),
                                             objectAnchor.referenceObject.center.z + Float(media.position?[2] ?? 0.0))

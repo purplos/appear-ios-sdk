@@ -18,8 +18,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let vc = RealityFileViewController()
-        vc.configure(withIdentifier: "96329fe1-8955-4ca1-930d-3e290bede6e7")
+        let vc = RealityProjectViewController()
         present(vc, animated: true, completion: nil)
     }
     

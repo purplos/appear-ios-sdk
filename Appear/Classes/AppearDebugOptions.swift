@@ -16,5 +16,6 @@ public struct AppearDebugOptions: OptionSet {
     
     public static let enableDebugging = AppearDebugOptions(rawValue: 1)
     public static let hideInfoLogging = AppearDebugOptions(rawValue: 2)
+    public static let disableCaching = AppearDebugOptions(rawValue: 3)
     
 }

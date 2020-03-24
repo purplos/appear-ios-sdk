@@ -39,6 +39,8 @@ public class TriggerARViewController: UIViewController {
         return view
     }()
     
+    var models: [SCNNode] = []
+    var videos: [VideoObject] = []
     var viewModel: SimpleARViewModel!
     private var customReferenceSet = Set<ARReferenceImage>()
     private var customOjectReferenceSet = Set<ARReferenceObject>()

@@ -10,37 +10,24 @@
 		1E68A18568BA301BA4F137A234CE8BD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C370B576BFB8E2C1305AFA53B9872485 /* Appear-dummy.m */; };
 		3DCE4CB8CB6263B3A5E93899AEAE8A67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		4B06C4A323EB04C400A0BDEA /* RealityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B06C4A223EB04C400A0BDEA /* RealityManager.swift */; };
 		4B503DED23986DEB00FA2070 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEA23986DEB00FA2070 /* Cache.swift */; };
 		4B503DEE23986DEB00FA2070 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEB23986DEB00FA2070 /* DiskCache.swift */; };
-		4B503DEF23986DEB00FA2070 /* RealityFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEC23986DEB00FA2070 /* RealityFileViewController.swift */; };
+		4B503DEF23986DEB00FA2070 /* RealityProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */; };
 		4B503DF32398723300FA2070 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
-		4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */; };
 		4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55C227C742300E4E455 /* AppearEndpoint.swift */; };
 		4B60E56C227C742500E4E455 /* AppearApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55D227C742300E4E455 /* AppearApp.swift */; };
 		4B60E56D227C742500E4E455 /* AppearError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55E227C742300E4E455 /* AppearError.swift */; };
 		4B60E56E227C742500E4E455 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E55F227C742300E4E455 /* WebService.swift */; };
-		4B60E570227C742500E4E455 /* SCNMaterial+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */; };
 		4B60E573227C742500E4E455 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E564227C742400E4E455 /* Endpoint.swift */; };
 		4B60E574227C742500E4E455 /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E565227C742400E4E455 /* HTTPResponseError.swift */; };
-		4B60E57E227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E579227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift */; };
-		4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */; };
-		4B60E580227C746300E4E455 /* TriggerARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57B227C746300E4E455 /* TriggerARViewController.swift */; };
 		4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57C227C746300E4E455 /* HTTPMethod.swift */; };
 		4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
 		4B74B3D522FC3FE6007A9406 /* AppearDebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */; };
 		4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */; };
 		4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9722F44989008A01D2 /* AppearManager.swift */; };
-		4B9C8A9E22F44989008A01D2 /* AppearModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */; };
-		4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */; };
-		4B9C8AA022F44989008A01D2 /* LoaderObjectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9A22F44989008A01D2 /* LoaderObjectNode.swift */; };
 		4B9C8AA122F44989008A01D2 /* SupportedFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */; };
-		4B9C8AA222F44989008A01D2 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9C22F44989008A01D2 /* mock.json */; };
 		4BD9206C23D05FD8000079F0 /* RealityProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206B23D05FD8000079F0 /* RealityProject.swift */; };
-		4BD9206E23D05FEF000079F0 /* RealityFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */; };
-		4BDA62A022F446FE00A4E99A /* AppearProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA629F22F446FE00A4E99A /* AppearProject.swift */; };
-		4BDA62A222F4492800A4E99A /* LoaderPlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA62A122F4492800A4E99A /* LoaderPlaneNode.swift */; };
-		4BDA62A422F4493800A4E99A /* FeatureNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA62A322F4493800A4E99A /* FeatureNode.swift */; };
+		4BD9206E23D05FEF000079F0 /* RealityProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */; };
 		7F307265E1A510B4A51902EB16CCF4F4 /* Pods-Appear_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B967E15AC5C8995CC6608E06552175 /* Pods-Appear_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D2BBDB6F6699F92D205075679CBA2AA /* Pods-Appear_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AA63E4BAD0A8E82A57FA6AD25770C3 /* Pods-Appear_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A504EE8D713B0F2114F44338773E2DE9 /* Pods-Appear_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA42C8B017A35D88F296F4E5260EDE0 /* Pods-Appear_Example-dummy.m */; };
@@ -70,36 +57,23 @@
 		2AECBCFD76FCA669A784A1187DF96492 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329C67ABBA76BD3BACA30D01F08A38F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41152CEFAEC90A51D7B6FE32E3F69EED /* Pods-Appear_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Appear_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		4B06C4A223EB04C400A0BDEA /* RealityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealityManager.swift; path = Appear/Classes/RealityManager.swift; sourceTree = "<group>"; };
 		4B503DEA23986DEB00FA2070 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = Appear/Classes/Cache.swift; sourceTree = "<group>"; };
 		4B503DEB23986DEB00FA2070 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiskCache.swift; path = Appear/Classes/DiskCache.swift; sourceTree = "<group>"; };
-		4B503DEC23986DEB00FA2070 /* RealityFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityFileViewController.swift; path = Appear/Classes/RealityFileViewController.swift; sourceTree = "<group>"; };
-		4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SCNNode+Extension.swift"; path = "Appear/Classes/SCNNode+Extension.swift"; sourceTree = "<group>"; };
+		4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProjectViewController.swift; path = Appear/Classes/RealityProjectViewController.swift; sourceTree = "<group>"; };
 		4B60E55C227C742300E4E455 /* AppearEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearEndpoint.swift; path = Appear/Classes/AppearEndpoint.swift; sourceTree = "<group>"; };
 		4B60E55D227C742300E4E455 /* AppearApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearApp.swift; path = Appear/Classes/AppearApp.swift; sourceTree = "<group>"; };
 		4B60E55E227C742300E4E455 /* AppearError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearError.swift; path = Appear/Classes/AppearError.swift; sourceTree = "<group>"; };
 		4B60E55F227C742300E4E455 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebService.swift; path = Appear/Classes/WebService.swift; sourceTree = "<group>"; };
-		4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SCNMaterial+Extension.swift"; path = "Appear/Classes/SCNMaterial+Extension.swift"; sourceTree = "<group>"; };
 		4B60E564227C742400E4E455 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = Appear/Classes/Endpoint.swift; sourceTree = "<group>"; };
 		4B60E565227C742400E4E455 /* HTTPResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPResponseError.swift; path = Appear/Classes/HTTPResponseError.swift; sourceTree = "<group>"; };
-		4B60E579227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TriggerARViewController+ARSCNViewDelegate.swift"; path = "Appear/Classes/TriggerARViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleARViewModel.swift; path = Appear/Classes/SimpleARViewModel.swift; sourceTree = "<group>"; };
-		4B60E57B227C746300E4E455 /* TriggerARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TriggerARViewController.swift; path = Appear/Classes/TriggerARViewController.swift; sourceTree = "<group>"; };
 		4B60E57C227C746300E4E455 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Appear/Classes/HTTPMethod.swift; sourceTree = "<group>"; };
 		4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleTutorialView.swift; path = Appear/Classes/SimpleTutorialView.swift; sourceTree = "<group>"; };
 		4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugOptions.swift; path = Appear/Classes/AppearDebugOptions.swift; sourceTree = "<group>"; };
 		4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugger.swift; path = Appear/Classes/AppearDebugger.swift; sourceTree = "<group>"; };
 		4B9C8A9722F44989008A01D2 /* AppearManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearManager.swift; path = Appear/Classes/AppearManager.swift; sourceTree = "<group>"; };
-		4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearModelNode.swift; path = Appear/Classes/AppearModelNode.swift; sourceTree = "<group>"; };
-		4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearVideoNode.swift; path = Appear/Classes/AppearVideoNode.swift; sourceTree = "<group>"; };
-		4B9C8A9A22F44989008A01D2 /* LoaderObjectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderObjectNode.swift; path = Appear/Classes/LoaderObjectNode.swift; sourceTree = "<group>"; };
 		4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportedFileType.swift; path = Appear/Classes/SupportedFileType.swift; sourceTree = "<group>"; };
-		4B9C8A9C22F44989008A01D2 /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mock.json; path = Appear/Classes/mock.json; sourceTree = "<group>"; };
 		4BD9206B23D05FD8000079F0 /* RealityProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProject.swift; path = Appear/Classes/RealityProject.swift; sourceTree = "<group>"; };
-		4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityFileViewModel.swift; path = Appear/Classes/RealityFileViewModel.swift; sourceTree = "<group>"; };
-		4BDA629F22F446FE00A4E99A /* AppearProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearProject.swift; path = Appear/Classes/AppearProject.swift; sourceTree = "<group>"; };
-		4BDA62A122F4492800A4E99A /* LoaderPlaneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderPlaneNode.swift; path = Appear/Classes/LoaderPlaneNode.swift; sourceTree = "<group>"; };
-		4BDA62A322F4493800A4E99A /* FeatureNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeatureNode.swift; path = Appear/Classes/FeatureNode.swift; sourceTree = "<group>"; };
+		4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProjectViewModel.swift; path = Appear/Classes/RealityProjectViewModel.swift; sourceTree = "<group>"; };
 		50A9AED94064C11E784DEC5D18D24205 /* Appear.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Appear.modulemap; sourceTree = "<group>"; };
 		546AA05E1A5B275B9F1EAB66AF649EA9 /* Pods-Appear_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Appear_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		55AA388A0CA90FEAAACB968BA3D6839E /* Appear-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Appear-prefix.pch"; sourceTree = "<group>"; };
@@ -192,13 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				4B60E55D227C742300E4E455 /* AppearApp.swift */,
-				4BDA629F22F446FE00A4E99A /* AppearProject.swift */,
 				4BD9206B23D05FD8000079F0 /* RealityProject.swift */,
 				4B9C8A9722F44989008A01D2 /* AppearManager.swift */,
-				4B9C8A9822F44989008A01D2 /* AppearModelNode.swift */,
-				4B9C8A9922F44989008A01D2 /* AppearVideoNode.swift */,
-				4B9C8A9A22F44989008A01D2 /* LoaderObjectNode.swift */,
-				4B9C8A9C22F44989008A01D2 /* mock.json */,
 				4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */,
 				4B60E564227C742400E4E455 /* Endpoint.swift */,
 				4B60E55C227C742300E4E455 /* AppearEndpoint.swift */,
@@ -207,18 +176,10 @@
 				4B60E57C227C746300E4E455 /* HTTPMethod.swift */,
 				4B503DEA23986DEB00FA2070 /* Cache.swift */,
 				4B503DEB23986DEB00FA2070 /* DiskCache.swift */,
-				4B503DEC23986DEB00FA2070 /* RealityFileViewController.swift */,
-				4B06C4A223EB04C400A0BDEA /* RealityManager.swift */,
-				4B60E57B227C746300E4E455 /* TriggerARViewController.swift */,
-				4BD9206D23D05FEF000079F0 /* RealityFileViewModel.swift */,
-				4B60E579227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift */,
-				4B60E57A227C746300E4E455 /* SimpleARViewModel.swift */,
+				4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */,
+				4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */,
 				4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */,
 				4B60E55F227C742300E4E455 /* WebService.swift */,
-				4BDA62A122F4492800A4E99A /* LoaderPlaneNode.swift */,
-				4BDA62A322F4493800A4E99A /* FeatureNode.swift */,
-				4B60E561227C742400E4E455 /* SCNMaterial+Extension.swift */,
-				4B60E55B227C742300E4E455 /* SCNNode+Extension.swift */,
 				4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */,
 				4B74B3D322FC3FE5007A9406 /* AppearDebugOptions.swift */,
 				EAE8D19546AA95151AE4C41E2ABF2DA2 /* Pod */,
@@ -439,7 +400,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B9C8AA222F44989008A01D2 /* mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,19 +426,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B9C8A9E22F44989008A01D2 /* AppearModelNode.swift in Sources */,
 				4B60E56C227C742500E4E455 /* AppearApp.swift in Sources */,
-				4B06C4A323EB04C400A0BDEA /* RealityManager.swift in Sources */,
 				4B74B3D522FC3FE6007A9406 /* AppearDebugOptions.swift in Sources */,
-				4B60E57E227C746300E4E455 /* TriggerARViewController+ARSCNViewDelegate.swift in Sources */,
-				4B60E56A227C742500E4E455 /* SCNNode+Extension.swift in Sources */,
 				4B60E56D227C742500E4E455 /* AppearError.swift in Sources */,
-				4BDA62A222F4492800A4E99A /* LoaderPlaneNode.swift in Sources */,
 				4B60E56E227C742500E4E455 /* WebService.swift in Sources */,
-				4B9C8AA022F44989008A01D2 /* LoaderObjectNode.swift in Sources */,
-				4B60E570227C742500E4E455 /* SCNMaterial+Extension.swift in Sources */,
 				4B503DEE23986DEB00FA2070 /* DiskCache.swift in Sources */,
-				4BDA62A422F4493800A4E99A /* FeatureNode.swift in Sources */,
 				348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */,
 				4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */,
 				4B503DED23986DEB00FA2070 /* Cache.swift in Sources */,
@@ -489,13 +441,9 @@
 				4B60E573227C742500E4E455 /* Endpoint.swift in Sources */,
 				4B60E574227C742500E4E455 /* HTTPResponseError.swift in Sources */,
 				4B60E582227C746300E4E455 /* SimpleTutorialView.swift in Sources */,
-				4B60E580227C746300E4E455 /* TriggerARViewController.swift in Sources */,
-				4BDA62A022F446FE00A4E99A /* AppearProject.swift in Sources */,
-				4B503DEF23986DEB00FA2070 /* RealityFileViewController.swift in Sources */,
+				4B503DEF23986DEB00FA2070 /* RealityProjectViewController.swift in Sources */,
 				4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */,
-				4B9C8A9F22F44989008A01D2 /* AppearVideoNode.swift in Sources */,
-				4B60E57F227C746300E4E455 /* SimpleARViewModel.swift in Sources */,
-				4BD9206E23D05FEF000079F0 /* RealityFileViewModel.swift in Sources */,
+				4BD9206E23D05FEF000079F0 /* RealityProjectViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

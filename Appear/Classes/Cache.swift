@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Cache: class {
-    func put<C: Codable>(_ cachable: C, withKey key: String, expires expiration: CacheExpiration) throws
+    func put<C: Codable>(_ cachable: C, withKey key: String, fileType: SupportedFileType, expires expiration: CacheExpiration) throws -> URL
     func get<C: Codable>(_ type: C.Type, forKey key: String) -> C?
     func has<C: Codable>(_ type: C.Type, forKey key: String) -> Bool
     func remove<C: Codable>(_ type: C.Type, forKey key: String) throws

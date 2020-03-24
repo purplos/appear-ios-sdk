@@ -16,20 +16,21 @@ class DiskCache: Cache {
         return dir.appendingPathComponent("Cache")
     }()
 
-    private func fileURL<C: Codable>(for type: C.Type, andKey key: String) -> URL {
-        let filePath = "\(C.self)-\(key).json"
+    public func fileURL(forKey key: String, fileType: SupportedFileType) -> URL {
+        let filePath = "\(key).json"
         return cacheDirectory.appendingPathComponent(filePath)
     }
 
-    public func put<C: Codable>(_ cachable: C, withKey key: String, expires expiration: CacheExpiration = .never) throws {
+    public func put<C: Codable>(_ cachable: C, withKey key: String, fileType: SupportedFileType, expires expiration: CacheExpiration = .never) throws -> URL {
         let cacheObject = CacheObject(cachable: cachable, expirationDate: expiration.expirationDate)
         let data = try JSONEncoder().encode(cacheObject)
         try FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true, attributes: nil)
-        try data.write(to: fileURL(for: C.self, andKey: key))
+        try data.write(to: fileURL(forKey: key, fileType: fileType))
+        return fileURL(forKey: key, fileType: fileType)
     }
-
+    
     public func get<C: Codable>(_ type: C.Type, forKey key: String) -> C? {
-        guard let data = try? Data(contentsOf: fileURL(for: C.self, andKey: key)),
+        guard let data = try? Data(contentsOf: fileURL(forKey: key, fileType: .reality)),
             let cacheObject = try? JSONDecoder().decode(CacheObject<C>.self, from: data) else { return nil }
 
         guard let expirationDate = cacheObject.expirationDate else {
@@ -50,7 +51,7 @@ class DiskCache: Cache {
     }
 
     public func remove<C: Codable>(_ type: C.Type, forKey key: String) throws {
-        try FileManager.default.removeItem(at: fileURL(for: type, andKey: key))
+        try FileManager.default.removeItem(at: fileURL(forKey: key, fileType: .reality))
     }
 
     public func clear() throws {
