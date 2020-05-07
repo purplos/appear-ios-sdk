@@ -36,43 +36,65 @@ public class RealityProjectViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        if let id = identifier {
-            realityViewModel.fetchRealityMedia(withID: id) { (result) in
-                switch result {
-                case .success(let media):
-                    self.fetchAllActiveMediaURLs(media: [media]) { (result) in
-                        switch result {
-                        case .success(let urls):
-                            self.loadAnchors(from: urls)
-                        case .failure(let error):
-                            fatalError(error.localizedDescription)
-                        }
-                    }
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
-                }
-            }
-        } else {
-            realityViewModel.fetchProject { (result) in
-                switch result {
-                case .success(let project):
-                    self.fetchAllActiveMediaURLs(media: project.media) { (result) in
-                        switch result {
-                        case .success(let urls):
-                            self.loadAnchors(from: urls)
-                        case .failure(let error):
-                            fatalError(error.localizedDescription)
-                        }
-                    }
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
-                }
-            }
-        }
+        startARExperience()
+        self.realityViewModel.manager.setupActionListener()
     }
     
     public func configure(withIdentifier identifier: String) {
         self.identifier = identifier
+    }
+    
+    public func sendAction(withIdentifier identifier: String, entityName: String) {
+        guard let entity = arView.scene.findEntity(named: entityName) else { fatalError() }
+        sendAction(withIdentifier: identifier, entity: entity)
+    }
+    
+    public func sendAction(withIdentifier identifier: String, entity: Entity) {
+        realityViewModel.manager.sendAction(withIdentifier: identifier, entity: entity)
+    }
+    
+    private func startARExperience() {
+        if let id = identifier {
+            loadAnchorsFromMedia(with: id)
+        } else {
+            loadAnchorsByFetchingProject()
+        }
+    }
+    
+    private func loadAnchorsFromMedia(with id: String) {
+        realityViewModel.fetchRealityMedia(withID: id) { (result) in
+            switch result {
+            case .success(let media):
+                self.fetchAllActiveMediaURLs(media: [media]) { (result) in
+                    switch result {
+                    case .success(let urls):
+                        self.loadAnchors(from: urls)
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func loadAnchorsByFetchingProject() {
+        realityViewModel.fetchProject { (result) in
+            switch result {
+            case .success(let project):
+                self.fetchAllActiveMediaURLs(media: project.media) { (result) in
+                    switch result {
+                    case .success(let urls):
+                        self.loadAnchors(from: urls)
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
     }
     
     private func loadAnchors(from urls: [URL]) {
@@ -89,7 +111,6 @@ public class RealityProjectViewController: UIViewController {
             }
             self.hideTutorialView()
         }
-        
     }
     
     private func fetchAllActiveMediaURLs(media: [RealityMedia], completion: @escaping (Result<[URL]>) -> Void) {
@@ -141,7 +162,6 @@ public class RealityProjectViewController: UIViewController {
         if let url = url {
             print(url)
             DispatchQueue.main.async {
-                try! Data(contentsOf: url)
                 let loadRequest = Entity.loadAnchorAsync(contentsOf: url)
                 loadRequest.sink(receiveCompletion: { result in
                     switch result {
@@ -152,7 +172,6 @@ public class RealityProjectViewController: UIViewController {
                     }
                     }, receiveValue: { anchor in
                         print("receiveValue")
-                        self.setupNotificationListener()
                         self.arView.scene.addAnchor(anchor)
                         completion()
                     }).store(in: &self.subscribers)
@@ -170,36 +189,7 @@ public class RealityProjectViewController: UIViewController {
         })
     }
     
-    private func setupNotificationListener() {
-        Foundation.NotificationCenter.default.addObserver(self, selector: #selector(actionDidFire(notification:)), name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
-    }
-    
-    @objc
-    private func actionDidFire(notification: Foundation.Notification) {
 
-        guard let userInfo = notification.userInfo as? [Swift.String: Any] else {
-            return
-        }
-
-        guard let identifier = userInfo["RealityKit.NotifyAction.Identifier"] as? Swift.String else {
-                return
-        }
-
-        let entity = userInfo["RealityKit.NotifyAction.Entity"] as? RealityKit.Entity
-
-        onAction(identifier, entity)
-    }
-    
-    private func onAction(_ identifier: String, _ entity: Entity?) {
-        guard let handler = actionHandler else {
-            return
-        }
-        handler(identifier, entity)
-    }
-    
-    deinit {
-        Foundation.NotificationCenter.default.removeObserver(self, name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
-    }
 
 
 }

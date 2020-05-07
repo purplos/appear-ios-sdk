@@ -28,5 +28,4 @@ class RealityProjectViewModel {
             completion(result)
         }
     }
-    
 }

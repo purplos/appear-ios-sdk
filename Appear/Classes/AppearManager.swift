@@ -10,22 +10,16 @@ import CoreLocation
 import ARKit
 import RealityKit
 
-public protocol AppearManagerDelegate {
+public protocol AppearManagerNotificationDelegate {
     @available(iOS 13.0, *)
     func didReceiveActionNotification(withIdentifier identifier: String, entity: RealityKit.Entity?)
-}
-
-public protocol AppearManagerProtocol {
-    func fetchRealityProject(completion: @escaping (Result<RealityProject>) -> Void)
-    func fetchMedia(withID id: String, completion: @escaping (Result<RealityMedia>) -> Void)
-    func fetchRealityFileArchiveUrl(from media: RealityMedia, completion: @escaping (Result<URL>) -> Void)
 }
 
 public class AppearManager {
     
     let cache: DiskCache = DiskCache()
     
-    public var delegate: AppearManagerDelegate? {
+    public var delegate: AppearManagerNotificationDelegate? {
         didSet {
             if #available(iOS 13.0, *) {
                 setupActionListener()
@@ -40,7 +34,14 @@ public class AppearManager {
     }
     
     @available(iOS 13.0, *)
-    private func setupActionListener() {
+    func sendAction(withIdentifier identifier: String, entity: Entity) {
+        let notificationTrigger = NotificationTrigger(identifier: identifier, root: entity)
+        notificationTrigger.post()
+    }
+    
+    //MARK:- Receive notification
+    @available(iOS 13.0, *)
+    func setupActionListener() {
         Foundation.NotificationCenter.default.addObserver(self, selector: #selector(actionDidFire(notification:)), name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
     }
     
@@ -66,15 +67,44 @@ public class AppearManager {
         delegate?.didReceiveActionNotification(withIdentifier: identifier, entity: entity)
     }
     
+    //MARK:- Send notification
+    @available(iOS 13.0, *)
+    private class NotificationTrigger {
+
+        public let identifier: Swift.String
+
+        private weak var root: RealityKit.Entity?
+
+        fileprivate init(identifier: Swift.String, root: RealityKit.Entity?) {
+            self.identifier = identifier
+            self.root = root
+        }
+
+        public func post(overrides: [Swift.String: RealityKit.Entity]? = nil) {
+            guard let scene = root?.scene else {
+                print("Unable to post notification trigger with identifier \"\(self.identifier)\" because the root is not part of a scene")
+                return
+            }
+
+            var userInfo: [Swift.String: Any] = [
+                "RealityKit.NotificationTrigger.Scene": scene,
+                "RealityKit.NotificationTrigger.Identifier": self.identifier
+            ]
+            userInfo["RealityKit.NotificationTrigger.Overrides"] = overrides
+
+            Foundation.NotificationCenter.default.post(name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotificationTrigger"), object: self, userInfo: userInfo)
+        }
+
+    }
+    
     deinit {
         Foundation.NotificationCenter.default.removeObserver(self, name: Foundation.NSNotification.Name(rawValue: "RealityKit.NotifyAction"), object: nil)
     }
     
 }
 
+    //MARK:- AppearManagerProtocol implementation
 extension AppearManager: AppearManagerProtocol {
-    
-    //MARK:- Reality project type
     public func fetchRealityProject (completion: @escaping (Result<RealityProject>) -> Void) {
         WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
             switch result {
@@ -83,11 +113,13 @@ extension AppearManager: AppearManagerProtocol {
                 decoder.dateDecodingStrategy = .secondsSince1970
                 AppearLogger().debugPrint("Successfully fetched project data")
                 AppearLogger().debugPrint(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
-                guard let project = try? decoder.decode(RealityProject.self, from: data) else {
-                    AppearLogger().fatalErrorPrint("Unable to decode project data to RealityProject struct")
+                do {
+                    let project = try decoder.decode(RealityProject.self, from: data)
+                    AppearLogger().debugPrint("Successfully decoded project data to AppearProject")
+                    completion(Result.success(project))
+                } catch {
+                    self.handle(fatalError: AppearError.unableToDecode(.project))
                 }
-                AppearLogger().debugPrint("Successfully decoded project data to AppearProject")
-                completion(Result.success(project))
             case .failure(let error):
                 completion(Result.failure(error))
             }
@@ -102,11 +134,14 @@ extension AppearManager: AppearManagerProtocol {
                 decoder.dateDecodingStrategy = .secondsSince1970
                 AppearLogger().debugPrint("Successfully fetched media data")
                 AppearLogger().debugPrint(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
-                guard let media = try? decoder.decode(RealityMedia.self, from: data) else {
-                    AppearLogger().fatalErrorPrint("Unable to decode media data to RealityMedia struct")
+                
+                do {
+                    let media = try decoder.decode(RealityMedia.self, from: data)
+                    AppearLogger().debugPrint("Successfully decoded data to RealityMedia")
+                    completion(Result.success(media))
+                }catch {
+                    self.handle(fatalError: AppearError.unableToDecode(.project))
                 }
-                AppearLogger().debugPrint("Successfully decoded project data to AppearProject")
-                completion(Result.success(media))
             case .failure(let error):
                 completion(Result.failure(error))
             }
@@ -117,9 +152,11 @@ extension AppearManager: AppearManagerProtocol {
         guard let url = URL(string: media.url) else { fatalError() }
         AppearLogger().debugPrint("Fetching augmented media data with id \(media.id) from URL: \(url.absoluteString)")
         
-        if cache.has(Data.self, forKey: media.id) {
-            print("returning cached url")
-            completion(Result.success(cache.fileURL(forKey: media.id, fileType: .reality)))
+        if let options = AppearApp.debugOptions,
+            !options.contains(.disableCaching),
+            cache.has(forKey: media.id) {
+            AppearLogger().debugPrint("Media data with id \(media.id) found in cache")
+            completion(Result.success(cache.fileURLs(forKey: media.id, fileType: .reality)[1]))
         } else {
             self.fetchData(from: url) { (result) in
                 switch result {
@@ -161,22 +198,22 @@ extension AppearManager: AppearManagerProtocol {
         downloadTask.resume()
     }
     
+    //MARK:- Cache
     private func store(data: Data, fileName: String, fileType: SupportedFileType, completion: @escaping (Result<URL>) -> Void) {
         do {
-            let url = try cache.put(data, withKey: fileName, fileType: fileType, expires: .in(.minutes(15)))
+            let isCachingDisabled = AppearApp.debugOptions?.contains(.disableCaching) ?? false
+            let url = try cache.put(data, withKey: fileName, fileType: fileType, expires: isCachingDisabled ? .never : .in(.minutes(60)))
             completion(Result.success(url))
         } catch (let error) {
             completion(Result.failure(error))
         }
-        
-//        let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
-//        let targetURL = tempDirectoryURL.appendingPathComponent("\(fileName).\(fileType)")
-//        do {
-//            try data.write(to: targetURL)
-//        } catch let error {
-//            NSLog("Unable to copy file: \(error)")
-//            fatalError()
-//        }
-//        return targetURL
+    }
+    
+    private func handle(fatalError: Error) {
+        if let appearError = fatalError as? AppearError {
+            AppearLogger().fatalErrorPrint(appearError.errorMessage)
+        } else {
+            AppearLogger().fatalErrorPrint(fatalError.localizedDescription)
+        }
     }
 }

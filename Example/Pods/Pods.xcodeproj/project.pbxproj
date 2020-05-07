@@ -10,7 +10,6 @@
 		1E68A18568BA301BA4F137A234CE8BD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C370B576BFB8E2C1305AFA53B9872485 /* Appear-dummy.m */; };
 		3DCE4CB8CB6263B3A5E93899AEAE8A67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		4B503DED23986DEB00FA2070 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEA23986DEB00FA2070 /* Cache.swift */; };
 		4B503DEE23986DEB00FA2070 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEB23986DEB00FA2070 /* DiskCache.swift */; };
 		4B503DEF23986DEB00FA2070 /* RealityProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */; };
 		4B503DF32398723300FA2070 /* SimpleTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B60E57D227C746300E4E455 /* SimpleTutorialView.swift */; };
@@ -26,6 +25,7 @@
 		4B74B3D622FC3FE6007A9406 /* AppearDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */; };
 		4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9722F44989008A01D2 /* AppearManager.swift */; };
 		4B9C8AA122F44989008A01D2 /* SupportedFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */; };
+		4BC2CBEF242E1B860090C01A /* AppearManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2CBEE242E1B860090C01A /* AppearManagerProtocol.swift */; };
 		4BD9206C23D05FD8000079F0 /* RealityProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206B23D05FD8000079F0 /* RealityProject.swift */; };
 		4BD9206E23D05FEF000079F0 /* RealityProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */; };
 		7F307265E1A510B4A51902EB16CCF4F4 /* Pods-Appear_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B967E15AC5C8995CC6608E06552175 /* Pods-Appear_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,7 +57,6 @@
 		2AECBCFD76FCA669A784A1187DF96492 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329C67ABBA76BD3BACA30D01F08A38F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41152CEFAEC90A51D7B6FE32E3F69EED /* Pods-Appear_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Appear_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		4B503DEA23986DEB00FA2070 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = Appear/Classes/Cache.swift; sourceTree = "<group>"; };
 		4B503DEB23986DEB00FA2070 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiskCache.swift; path = Appear/Classes/DiskCache.swift; sourceTree = "<group>"; };
 		4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProjectViewController.swift; path = Appear/Classes/RealityProjectViewController.swift; sourceTree = "<group>"; };
 		4B60E55C227C742300E4E455 /* AppearEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearEndpoint.swift; path = Appear/Classes/AppearEndpoint.swift; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		4B74B3D422FC3FE6007A9406 /* AppearDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearDebugger.swift; path = Appear/Classes/AppearDebugger.swift; sourceTree = "<group>"; };
 		4B9C8A9722F44989008A01D2 /* AppearManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearManager.swift; path = Appear/Classes/AppearManager.swift; sourceTree = "<group>"; };
 		4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportedFileType.swift; path = Appear/Classes/SupportedFileType.swift; sourceTree = "<group>"; };
+		4BC2CBEE242E1B860090C01A /* AppearManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppearManagerProtocol.swift; path = Appear/Classes/AppearManagerProtocol.swift; sourceTree = "<group>"; };
 		4BD9206B23D05FD8000079F0 /* RealityProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProject.swift; path = Appear/Classes/RealityProject.swift; sourceTree = "<group>"; };
 		4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealityProjectViewModel.swift; path = Appear/Classes/RealityProjectViewModel.swift; sourceTree = "<group>"; };
 		50A9AED94064C11E784DEC5D18D24205 /* Appear.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Appear.modulemap; sourceTree = "<group>"; };
@@ -168,13 +168,13 @@
 				4B60E55D227C742300E4E455 /* AppearApp.swift */,
 				4BD9206B23D05FD8000079F0 /* RealityProject.swift */,
 				4B9C8A9722F44989008A01D2 /* AppearManager.swift */,
+				4BC2CBEE242E1B860090C01A /* AppearManagerProtocol.swift */,
 				4B9C8A9B22F44989008A01D2 /* SupportedFileType.swift */,
 				4B60E564227C742400E4E455 /* Endpoint.swift */,
 				4B60E55C227C742300E4E455 /* AppearEndpoint.swift */,
 				4B60E55E227C742300E4E455 /* AppearError.swift */,
 				4B60E565227C742400E4E455 /* HTTPResponseError.swift */,
 				4B60E57C227C746300E4E455 /* HTTPMethod.swift */,
-				4B503DEA23986DEB00FA2070 /* Cache.swift */,
 				4B503DEB23986DEB00FA2070 /* DiskCache.swift */,
 				4B503DEC23986DEB00FA2070 /* RealityProjectViewController.swift */,
 				4BD9206D23D05FEF000079F0 /* RealityProjectViewModel.swift */,
@@ -366,6 +366,9 @@
 					283D4765B5742E07F012DED7F7F64BE9 = {
 						LastSwiftMigration = 1020;
 					};
+					6A7207B91582BE9DDC210DDE3514C71D = {
+						LastSwiftMigration = 1130;
+					};
 				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
@@ -433,8 +436,8 @@
 				4B503DEE23986DEB00FA2070 /* DiskCache.swift in Sources */,
 				348F43EECE570F4BED43F5969F221A3F /* Appear-dummy.m in Sources */,
 				4B60E56B227C742500E4E455 /* AppearEndpoint.swift in Sources */,
-				4B503DED23986DEB00FA2070 /* Cache.swift in Sources */,
 				4B9C8A9D22F44989008A01D2 /* AppearManager.swift in Sources */,
+				4BC2CBEF242E1B860090C01A /* AppearManagerProtocol.swift in Sources */,
 				4BD9206C23D05FD8000079F0 /* RealityProject.swift in Sources */,
 				4B60E581227C746300E4E455 /* HTTPMethod.swift in Sources */,
 				4B9C8AA122F44989008A01D2 /* SupportedFileType.swift in Sources */,
@@ -718,6 +721,7 @@
 				PRODUCT_NAME = Pods_Appear_Example;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -751,6 +755,7 @@
 				PRODUCT_NAME = Pods_Appear_Example;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

@@ -23,7 +23,7 @@ enum AppearError: Error {
 }
 
 enum DecodeAttempt {
-    case trigger
+    case project
     case media
 }
 
@@ -51,7 +51,7 @@ extension AppearError: LocalizedError {
             return "Unable to create model from URL"
         case .unableToDecode(let attempt):
             switch attempt {
-            case .trigger:
+            case .project:
                 return "Unable to decode trigger"
             case .media:
                 return "Unable to decode media"

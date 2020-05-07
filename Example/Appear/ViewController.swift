@@ -14,7 +14,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //present(TriggerARViewController(), animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
