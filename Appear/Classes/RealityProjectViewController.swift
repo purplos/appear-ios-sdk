@@ -38,7 +38,7 @@ public class RealityProjectViewController: UIViewController {
         setupViews()
         startARExperience()
         self.realityViewModel.manager.delegate = self
-        self.realityViewModel.manager.setupActionListener()
+//        self.realityViewModel.manager.setupActionListener()
     }
     
     public func configure(withIdentifier identifier: String) {
