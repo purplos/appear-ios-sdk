@@ -37,6 +37,7 @@ public class RealityProjectViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         startARExperience()
+        self.realityViewModel.manager.delegate = self
         self.realityViewModel.manager.setupActionListener()
     }
     
@@ -188,8 +189,12 @@ public class RealityProjectViewController: UIViewController {
             self.tutorialView.isHidden = true
         })
     }
-    
 
+}
 
-
+@available(iOS 13.0, *)
+extension RealityProjectViewController: AppearManagerNotificationDelegate {
+    public func didReceiveActionNotification(withIdentifier identifier: String, entity: Entity?) {
+        actionHandler?(identifier, entity)
+    }
 }
