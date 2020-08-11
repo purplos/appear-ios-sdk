@@ -51,6 +51,14 @@ public class SimpleTutorialView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func setTitle(_ string: String) {
+        self.titleLabel.text = string
+    }
+    
+    public func setDescription(_ string: String) {
+        self.descriptionLabel.text = string
+    }
+    
     private func setupView() {
         self.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
