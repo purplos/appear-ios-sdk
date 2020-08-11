@@ -141,7 +141,11 @@ public class RealityProjectViewController: UIViewController {
             }
             
             if let config = configurations.first {
+                #if targetEnvironment(simulator)
+                  // Simulator!
+                #else
                 self.arView.session.run(config, options: .resetTracking)
+                #endif
             }
              
             for anchor in anchors {
@@ -209,6 +213,9 @@ public class RealityProjectViewController: UIViewController {
                         print(error.localizedDescription)
                     }
                     }, receiveValue: { anchor in
+                        #if targetEnvironment(simulator)
+                          // Simulator!
+                        #else
                         switch anchor.anchoring.target {
                         case .plane(let alignment, classification: _, minimumBounds: _):
                             let config = ARWorldTrackingConfiguration()
@@ -244,6 +251,7 @@ public class RealityProjectViewController: UIViewController {
                             }
                             completion(config, anchor, nil)
                         }
+                        #endif
                     }).store(in: &self.subscribers)
                 }
             } else {
