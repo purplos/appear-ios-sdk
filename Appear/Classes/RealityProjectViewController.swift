@@ -33,6 +33,10 @@ public class RealityProjectViewController: UIViewController {
     /// By default isOcclusionFloorEnabled is set to false
     public var isOcclusionFloorEnabled = false
     
+    /// A Boolean value specifying whether people occlusion should be added to the ARConfiguration
+    /// By default isOcclusionFloorEnabled is set to false
+    public var isPeopleOcclusionEnabled = false
+    
     private var actionHandler: ((String, RealityKit.Entity?) -> Void)?
     private var identifier: String?
     private let realityViewModel = RealityProjectViewModel()
@@ -211,7 +215,9 @@ public class RealityProjectViewController: UIViewController {
                             config.planeDetection = alignment == .horizontal ? .horizontal : .vertical
                             config.environmentTexturing = .automatic
                             config.isLightEstimationEnabled = true
-                            config.frameSemantics.insert(.personSegmentationWithDepth)
+                            if self.isPeopleOcclusionEnabled {
+                                config.frameSemantics.insert(.personSegmentationWithDepth)
+                            }
                             if self.isOcclusionFloorEnabled {
                                 let floor = MeshResource.generatePlane(width: 2, depth: 2)
                                 let material = OcclusionMaterial()
@@ -233,7 +239,9 @@ public class RealityProjectViewController: UIViewController {
                             let config = ARWorldTrackingConfiguration()
                             config.environmentTexturing = .automatic
                             config.isLightEstimationEnabled = true
-                            config.frameSemantics.insert(.personSegmentationWithDepth)
+                            if self.isPeopleOcclusionEnabled {
+                                config.frameSemantics.insert(.personSegmentationWithDepth)
+                            }
                             completion(config, anchor, nil)
                         }
                     }).store(in: &self.subscribers)

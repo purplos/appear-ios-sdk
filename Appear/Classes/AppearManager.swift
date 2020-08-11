@@ -123,7 +123,6 @@ extension AppearManager: AppearManagerProtocol {
                 decoder.dateDecodingStrategy = .secondsSince1970
                 AppearLogger().debugPrint("Successfully fetched media data")
                 AppearLogger().debugPrint(String(data: data, encoding: String.Encoding.utf8) ?? "kunne ikke printe json")
-                
                 do {
                     let media = try decoder.decode(RealityMedia.self, from: data)
                     AppearLogger().debugPrint("Successfully decoded data to RealityMedia")
