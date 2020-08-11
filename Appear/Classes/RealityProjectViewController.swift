@@ -8,6 +8,7 @@
 import UIKit
 import RealityKit
 import Combine
+import ARKit
 
 @available(iOS 13.0, *)
 public class RealityProjectViewController: UIViewController {
@@ -28,6 +29,10 @@ public class RealityProjectViewController: UIViewController {
         actionHandler = handler
     }
     
+    /// A Boolean value specifying whether the first detected plane should have an occlusion material.
+    /// By default isOcclusionFloorEnabled is set to false
+    public var isOcclusionFloorEnabled = false
+    
     private var actionHandler: ((String, RealityKit.Entity?) -> Void)?
     private var identifier: String?
     private let realityViewModel = RealityProjectViewModel()
@@ -38,7 +43,7 @@ public class RealityProjectViewController: UIViewController {
         setupViews()
         startARExperience()
         self.realityViewModel.manager.delegate = self
-//        self.realityViewModel.manager.setupActionListener()
+        self.realityViewModel.manager.setupActionListener()
     }
     
     public func configure(withIdentifier identifier: String) {
@@ -99,18 +104,48 @@ public class RealityProjectViewController: UIViewController {
     }
     
     private func loadAnchors(from urls: [URL]) {
+        
         let group = DispatchGroup()
+        var configurations: [ARConfiguration] = []
+        var anchors: [AnchorEntity] = []
+        
         for url in urls {
             group.enter()
-            self.addEntityToAnchor(url: url) {
+            self.addEntityToAnchor(url: url) { (config, anchor, error) in
+                guard error == nil else {
+                    self.presentAlert(campaignError: error!) { (_) in }
+                    return
+                }
+                guard let anchor = anchor else {
+                    self.presentAlert(campaignError: AppearError.errorWithMessage("no anchor")) { (_) in }
+                    return
+                }
+                if let config = config {
+                    configurations.append(config)
+                }
+                anchors.append(anchor)
                 group.leave()
             }
         }
+        
         group.notify(queue: .main) {
             for sub in self.subscribers {
                 sub.cancel()
             }
+            if configurations.count > 1 {
+                // TODO: Handle this
+            }
+            
+            if let config = configurations.first {
+                self.arView.session.run(config, options: .resetTracking)
+            }
+             
+            for anchor in anchors {
+                self.arView.scene.addAnchor(anchor)
+            }
+
             self.hideTutorialView()
+            
         }
     }
     
@@ -158,10 +193,8 @@ public class RealityProjectViewController: UIViewController {
             ])
     }
         
-    private func addEntityToAnchor(url: URL?, completion: @escaping () -> Void) {
-        print("addEntityToAnchor")
+        private func addEntityToAnchor(url: URL?, completion: @escaping (_ config: ARConfiguration?, _ anchor: AnchorEntity?, _ error: AppearError?) -> Void) {
         if let url = url {
-            print(url)
             DispatchQueue.main.async {
                 let loadRequest = Entity.loadAnchorAsync(contentsOf: url)
                 loadRequest.sink(receiveCompletion: { result in
@@ -172,14 +205,43 @@ public class RealityProjectViewController: UIViewController {
                         print(error.localizedDescription)
                     }
                     }, receiveValue: { anchor in
-                        print("receiveValue")
-                        self.arView.scene.addAnchor(anchor)
-                        completion()
+                        switch anchor.anchoring.target {
+                        case .plane(let alignment, classification: _, minimumBounds: _):
+                            let config = ARWorldTrackingConfiguration()
+                            config.planeDetection = alignment == .horizontal ? .horizontal : .vertical
+                            config.environmentTexturing = .automatic
+                            config.isLightEstimationEnabled = true
+                            config.frameSemantics.insert(.personSegmentationWithDepth)
+                            if self.isOcclusionFloorEnabled {
+                                let floor = MeshResource.generatePlane(width: 2, depth: 2)
+                                let material = OcclusionMaterial()
+                                let entity = ModelEntity(mesh: floor, materials: [material])
+                                anchor.addChild(entity)
+                            }
+                            completion(config, anchor, nil)
+                        case .image(group: _, name: _):
+                           let config = ARImageTrackingConfiguration()
+                           config.isAutoFocusEnabled = true
+                           config.maximumNumberOfTrackedImages = .max
+                           completion(config, anchor, nil)
+                        case .face:
+                            let config = ARFaceTrackingConfiguration()
+                            config.maximumNumberOfTrackedFaces = .max
+                            config.isLightEstimationEnabled = true
+                            completion(config, anchor, nil)
+                        default:
+                            let config = ARWorldTrackingConfiguration()
+                            config.environmentTexturing = .automatic
+                            config.isLightEstimationEnabled = true
+                            config.frameSemantics.insert(.personSegmentationWithDepth)
+                            completion(config, anchor, nil)
+                        }
                     }).store(in: &self.subscribers)
                 }
             } else {
-                fatalError("no url")
+                completion(nil, nil, AppearError.unableToCreateModelFromURL)
             }
+        
     }
     
     private func hideTutorialView() {

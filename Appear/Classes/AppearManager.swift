@@ -1,5 +1,5 @@
 //
-//  NewAppearManager.swift
+//  AppearManager.swift
 //  Appear
 //
 //  Created by Magnus Tviberg on 11/06/2019.
@@ -19,22 +19,10 @@ public class AppearManager {
     
     let cache: DiskCache = DiskCache()
     
-    public var delegate: AppearManagerNotificationDelegate? {
-        didSet {
-            if #available(iOS 13.0, *) {
-                setupActionListener()
-            } else {
-                // Fallback on earlier versions
-            }
-        }
-    }
-    
-    public init() {
-        guard AppearApp.isConfigured else { fatalError(AppearError.missingConfiguration.errorMessage)}
-    }
+    public var delegate: AppearManagerNotificationDelegate?
     
     @available(iOS 13.0, *)
-    func sendAction(withIdentifier identifier: String, entity: Entity) {
+    func sendAction(withIdentifier identifier: String, entity: Entity?) {
         let notificationTrigger = NotificationTrigger(identifier: identifier, root: entity)
         notificationTrigger.post()
     }
@@ -48,7 +36,6 @@ public class AppearManager {
     @available(iOS 13.0, *)
     @objc
     private func actionDidFire(notification: Foundation.Notification) {
-
         guard let userInfo = notification.userInfo as? [Swift.String: Any] else {
             return
         }
@@ -82,7 +69,7 @@ public class AppearManager {
 
         public func post(overrides: [Swift.String: RealityKit.Entity]? = nil) {
             guard let scene = root?.scene else {
-                print("Unable to post notification trigger with identifier \"\(self.identifier)\" because the root is not part of a scene")
+                AppearLogger().errorPrint("Unable to post notification trigger with identifier \"\(self.identifier)\" because the root is not part of a scene")
                 return
             }
 
@@ -106,6 +93,7 @@ public class AppearManager {
     //MARK:- AppearManagerProtocol implementation
 extension AppearManager: AppearManagerProtocol {
     public func fetchRealityProject (completion: @escaping (Result<RealityProject>) -> Void) {
+        guard AppearApp.isConfigured else { AppearLogger().fatalErrorPrint(AppearError.missingConfiguration.errorMessage)}
         WebService.sharedInstance.request(AppearEndpoint.getProject) { (result: Result<Data>) in
             switch result {
             case .success(let data):
@@ -127,6 +115,7 @@ extension AppearManager: AppearManagerProtocol {
     }
     
     public func fetchMedia(withID id: String, completion: @escaping (Result<RealityMedia>) -> Void) {
+        guard AppearApp.isConfigured else { AppearLogger().fatalErrorPrint(AppearError.missingConfiguration.errorMessage)}
         WebService.sharedInstance.request(AppearEndpoint.mediaWithID(id)) { (result: Result<Data>) in
             switch result {
             case .success(let data):
@@ -149,6 +138,7 @@ extension AppearManager: AppearManagerProtocol {
     }
     
     public func fetchRealityFileArchiveUrl(from media: RealityMedia, completion: @escaping (Result<URL>) -> Void) {
+        guard AppearApp.isConfigured else { AppearLogger().fatalErrorPrint(AppearError.missingConfiguration.errorMessage)}
         guard let url = URL(string: media.url) else { fatalError() }
         AppearLogger().debugPrint("Fetching augmented media data with id \(media.id) from URL: \(url.absoluteString)")
         
@@ -202,7 +192,7 @@ extension AppearManager: AppearManagerProtocol {
     private func store(data: Data, fileName: String, fileType: SupportedFileType, completion: @escaping (Result<URL>) -> Void) {
         do {
             let isCachingDisabled = AppearApp.debugOptions?.contains(.disableCaching) ?? false
-            let url = try cache.put(data, withKey: fileName, fileType: fileType, expires: isCachingDisabled ? .never : .in(.minutes(60)))
+            let url = try cache.put(data, withKey: fileName, fileType: fileType, expires: isCachingDisabled ? .in(.seconds(0)) : .in(.minutes(60)))
             completion(Result.success(url))
         } catch (let error) {
             completion(Result.failure(error))
