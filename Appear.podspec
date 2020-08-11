@@ -29,7 +29,7 @@ A framework that makes it super easy to use dynamic Augmented Reality content in
   s.source           = { :git => 'https://github.com/purplos/appear-ios-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '11.3'
+  s.ios.deployment_target = '13.0'
 
   s.source_files = 'Appear/Classes/**/*'
   
