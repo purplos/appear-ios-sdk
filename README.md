@@ -1,7 +1,7 @@
 ![Header](https://raw.githubusercontent.com/purplos/appear-ios-sdk/master/Skjermbilde%202019-09-17%20kl.%2009.58.59.png)
 # Appear iOS SDK
 
-Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. This framework allows you to upload Augmented Reality assets to a database and access them in your app whenever they are needed.
+Appear is an app development platform with tools to help you build apps with dynamic Augmented Reality content. This framework allows you to upload Augmented Reality assets to a database and access them in your app whenever they are needed. You can also update the reality content without having to update the app.
 
 Read more about The Appear Framework on our [website](https://appear-landingpage.netlify.com/)
 
@@ -41,14 +41,14 @@ Import the Appear module in your UIApplicationDelegate:
 import Appear
 ```
 
-Configure AppearApp, typically in your application's application:didFinishLaunchingWithOptions: method. Optionally add options like enabling debugging:
+Configure AppearApp, typically in your application's application:didFinishLaunchingWithOptions: method. Optionally add options like enabling debugging or disabling caching:
 
 ```swift
 // without options
 AppearApp.configure()
 
 // with options
-AppearApp.configure([.enableDebugging]) 
+AppearApp.configure([.enableDebugging, .disableCaching]) 
 ```
 
 Remember to add a NSCameraUsageDescription to your project if you havent already done so. Add the following code into your info.plist file
@@ -58,7 +58,7 @@ Remember to add a NSCameraUsageDescription to your project if you havent already
 <string>{YOUR APP NAME} requires access to your phone’s camera.</string>
 ```
 
-Download the Appear-info.plist file from the appear console website and drag it into your project
+Download the AppearInfo.plist file from the appear console website and drag it into your project
 
 ## Usage
 
@@ -71,7 +71,21 @@ let vc = RealityFileViewController()
 present(vc, animated: true, completion: nil)
 ```
 
-You can also replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the RealityFileViewController before you present it.
+You can customize the tutorialView
+
+```swift
+if let tutorialView = gameVC.tutorialView as? SimpleTutorialView {
+
+    // update the title
+    tutorialView.setTitle("Hold kameraet mot ansiketet ditt")
+    
+    // update the description
+    tutorialView.setDescription("Laster...")
+    
+}
+```
+
+or you can replace the default tutorial view with your own UIView. Just make sure to replace the tutorialView on the RealityFileViewController before you present it.
 
 ```swift
 // create an instance of your own subclass of UIView
@@ -99,12 +113,31 @@ vc.configure(withIdentifier: "")
 You can run code whenever an alert is being received from a behavior. For example you can run a network request when the user clicks on a 3D model, detects a plane/image/object, etc..
 
 ```swift
-let vc = RealityFileViewController()
 vc.onAction { (identifier, entity) in
     if identifier == "your_identifier" {
         // Do something
     }
 }
+```
+
+In order to notify/trigger a behavior from Xcode you can easly notify a behavior by calling the sendAction method. You can optionally pass in the entity or the name of the entity which represent one of the affected objects for this behavior.
+
+```swift
+// passing in the name of the enitity
+vc.sendAction(withIdentifier: "your_identifier", entityName: "nameOfObject")
+
+// passing in the entity
+vc.sendAction(withIdentifier: "your_identifier", entity: entity)
+```
+
+**Other Features**
+
+```swift
+// Enable people occlusion
+vc.isPeopleOcclusionEnabled = true
+
+// Adds a occlusion material to the detected plane.
+vc.isOcclusionFloorEnabled = true
 ```
 
 ### Advanced implementation of a Reality Projects
@@ -162,6 +195,23 @@ In order to handle the recieved alerts from the reality file make sure the ViewC
 
 ```swift
 func didReceiveActionNotification(withIdentifier identifier: String, entity: RealityKit.Entity?)
+```
+
+In order to notify/trigger a behavior from Xcode you'll first have to call the setupActionListener method on the manager.
+
+```swift
+manager.setupActionListener()
+```
+
+Once the action listener is setup you can easly notify a behavior by calling the onAction method on the manager. You can optionally pass in the entity or the name of the entity which represent one of the affected objects for this behavior.
+
+```swift
+
+// passing in the name of the enitity
+manager.sendAction(withIdentifier: identifier, entityName: "nameOfObject")
+
+// passing in the entity
+manager.sendAction(withIdentifier: identifier, entity: entity)
 ```
 
 ## Versioning
