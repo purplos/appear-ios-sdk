@@ -59,6 +59,10 @@ public class SimpleTutorialView: UIView {
         self.descriptionLabel.text = string
     }
     
+    public func setBackgroundColor(_ color: UIColor) {
+        self.backgroundColor = color
+    }
+    
     private func setupView() {
         self.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
