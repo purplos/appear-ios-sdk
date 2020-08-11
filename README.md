@@ -64,7 +64,19 @@ Download the AppearInfo.plist file from the appear console website and drag it i
 
 ### Quick and easy implementation of a Reality Projects
 
-With the Appear Framework added to your project you can easly create a RealityFileViewController. Place this in a button click function or in your viewDidAppear to navigate to the camera view.
+**Using storyboard**
+
+Create a subclass of RealityProjectViewController
+
+```swift
+class YourCustomViewController: RealityProjectViewController { }
+```
+
+In the storyboard you can now add a UIViewController and set the class as YourCustomViewController
+
+**Programmatically**
+
+Create an instance of RealityFileViewController. Place this in a button click function or in your viewDidAppear to navigate to the camera view.
 
 ```swift
 let vc = RealityFileViewController()
@@ -81,6 +93,9 @@ if let tutorialView = gameVC.tutorialView as? SimpleTutorialView {
     
     // update the description
     tutorialView.setDescription("Laster...")
+    
+    // update the background color
+    tutorialView.setBackgroundColor(UIColor.black.withAlphaComponent(0.8))
     
 }
 ```
