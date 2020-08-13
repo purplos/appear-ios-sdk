@@ -39,15 +39,19 @@ public class RealityProjectViewController: UIViewController {
     
     private var actionHandler: ((String, RealityKit.Entity?) -> Void)?
     private var identifier: String?
-    private let realityViewModel = RealityProjectViewModel()
-    private var subscribers = Set<AnyCancellable>()
+    private var realityViewModel: RealityProjectViewModel? = RealityProjectViewModel()
+    private var subscribers: Set<AnyCancellable>?
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         startARExperience()
-        self.realityViewModel.manager.delegate = self
-        self.realityViewModel.manager.setupActionListener()
+        self.realityViewModel?.manager.delegate = self
+        self.realityViewModel?.manager.setupActionListener()
+    }
+    
+    deinit {
+        realityViewModel = nil
     }
     
     public func configure(withIdentifier identifier: String) {
@@ -60,7 +64,7 @@ public class RealityProjectViewController: UIViewController {
     }
     
     public func sendAction(withIdentifier identifier: String, entity: Entity) {
-        realityViewModel.manager.sendAction(withIdentifier: identifier, entity: entity)
+        realityViewModel?.manager.sendAction(withIdentifier: identifier, entity: entity)
     }
     
     private func startARExperience() {
@@ -72,7 +76,7 @@ public class RealityProjectViewController: UIViewController {
     }
     
     private func loadAnchorsFromMedia(with id: String) {
-        realityViewModel.fetchRealityMedia(withID: id) { (result) in
+        realityViewModel?.fetchRealityMedia(withID: id) { (result) in
             switch result {
             case .success(let media):
                 self.fetchAllActiveMediaURLs(media: [media]) { (result) in
@@ -90,13 +94,13 @@ public class RealityProjectViewController: UIViewController {
     }
     
     private func loadAnchorsByFetchingProject() {
-        realityViewModel.fetchProject { (result) in
+        realityViewModel?.fetchProject { [weak self] (result) in
             switch result {
             case .success(let project):
-                self.fetchAllActiveMediaURLs(media: project.media) { (result) in
+                self?.fetchAllActiveMediaURLs(media: project.media) { (result) in
                     switch result {
                     case .success(let urls):
-                        self.loadAnchors(from: urls)
+                        self?.loadAnchors(from: urls)
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
@@ -115,13 +119,13 @@ public class RealityProjectViewController: UIViewController {
         
         for url in urls {
             group.enter()
-            self.addEntityToAnchor(url: url) { (config, anchor, error) in
+            self.addEntityToAnchor(url: url) { [weak self] (config, anchor, error) in
                 guard error == nil else {
-                    self.presentAlert(campaignError: error!) { (_) in }
+                    self?.presentAlert(campaignError: error!) { (_) in }
                     return
                 }
                 guard let anchor = anchor else {
-                    self.presentAlert(campaignError: AppearError.errorWithMessage("no anchor")) { (_) in }
+                    self?.presentAlert(campaignError: AppearError.errorWithMessage("no anchor")) { (_) in }
                     return
                 }
                 if let config = config {
@@ -133,8 +137,11 @@ public class RealityProjectViewController: UIViewController {
         }
         
         group.notify(queue: .main) {
-            for sub in self.subscribers {
-                sub.cancel()
+            if let subs = self.subscribers {
+                for sub in subs  {
+                    sub.cancel()
+                }
+                self.subscribers = nil
             }
             if configurations.count > 1 {
                 // TODO: Handle this
@@ -144,11 +151,13 @@ public class RealityProjectViewController: UIViewController {
                 #if targetEnvironment(simulator)
                   // Simulator!
                 #else
+                print("running session")
                 self.arView.session.run(config, options: .resetTracking)
                 #endif
             }
              
             for anchor in anchors {
+                print("adding anchor: \(anchor)")
                 self.arView.scene.addAnchor(anchor)
             }
 
@@ -163,7 +172,7 @@ public class RealityProjectViewController: UIViewController {
         var urls: [URL] = []
         for m in media {
             group.enter()
-            self.realityViewModel.fetchRealityFileUrl(from: m) { (result) in
+            self.realityViewModel?.fetchRealityFileUrl(from: m) { (result) in
                 switch result {
                 case .success(let url):
                     urls.append(url)
@@ -202,6 +211,7 @@ public class RealityProjectViewController: UIViewController {
     }
         
         private func addEntityToAnchor(url: URL?, completion: @escaping (_ config: ARConfiguration?, _ anchor: AnchorEntity?, _ error: AppearError?) -> Void) {
+            subscribers = Set<AnyCancellable>()
         if let url = url {
             DispatchQueue.main.async {
                 let loadRequest = Entity.loadAnchorAsync(contentsOf: url)
@@ -212,20 +222,21 @@ public class RealityProjectViewController: UIViewController {
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
-                    }, receiveValue: { anchor in
+                    }, receiveValue: { [weak self] anchor in
                         #if targetEnvironment(simulator)
                           // Simulator!
                         #else
+                        print("receiveValue")
                         switch anchor.anchoring.target {
                         case .plane(let alignment, classification: _, minimumBounds: _):
                             let config = ARWorldTrackingConfiguration()
                             config.planeDetection = alignment == .horizontal ? .horizontal : .vertical
                             config.environmentTexturing = .automatic
                             config.isLightEstimationEnabled = true
-                            if self.isPeopleOcclusionEnabled {
+                            if let isPeopleOcclusionEnabled = self?.isPeopleOcclusionEnabled, isPeopleOcclusionEnabled {
                                 config.frameSemantics.insert(.personSegmentationWithDepth)
                             }
-                            if self.isOcclusionFloorEnabled {
+                            if let isOcclusionFloorEnabled = self?.isOcclusionFloorEnabled, isOcclusionFloorEnabled{
                                 let floor = MeshResource.generatePlane(width: 2, depth: 2)
                                 let material = OcclusionMaterial()
                                 let entity = ModelEntity(mesh: floor, materials: [material])
@@ -246,13 +257,13 @@ public class RealityProjectViewController: UIViewController {
                             let config = ARWorldTrackingConfiguration()
                             config.environmentTexturing = .automatic
                             config.isLightEstimationEnabled = true
-                            if self.isPeopleOcclusionEnabled {
+                            if let isPeopleOcclusionEnabled = self?.isPeopleOcclusionEnabled, isPeopleOcclusionEnabled {
                                 config.frameSemantics.insert(.personSegmentationWithDepth)
                             }
                             completion(config, anchor, nil)
                         }
                         #endif
-                    }).store(in: &self.subscribers)
+                    }).store(in: &self.subscribers!)
                 }
             } else {
                 completion(nil, nil, AppearError.unableToCreateModelFromURL)

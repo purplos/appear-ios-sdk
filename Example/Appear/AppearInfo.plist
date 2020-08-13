@@ -1,14 +1,14 @@
-
-  <plist version="1.0">
-      <dict>
-          <key>BaseURL</key>
-          <string>https://appear-nest.herokuapp.com/</string>
-          <key>ProjectID</key>
-          <string>asdfasd-pwabgwrj</string>
-          <key>BundleID</key>
-          <string>no.purpl.Appear-Example</string>
-          <key>APIKey</key>
-          <string>f25593a2-1531-4a1f-b698-f5cb83297444</string>
-      </dict>
-  </plist>
-  
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseURL</key>
+	<string>https://appear-nest.herokuapp.com/</string>
+	<key>ProjectID</key>
+	<string>appearexampleproject-q7q7zcco6</string>
+	<key>BundleID</key>
+	<string>no.purpl.Appear-Example</string>
+	<key>APIKey</key>
+	<string>27d2fd3a-8501-47a4-89c7-ae0cab531339</string>
+</dict>
+</plist>
